@@ -7,6 +7,9 @@ import { useLogout } from './hooks/useLogout'
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Intermediate from './pages/Intermediate';
+import AgentIntermediate from './pages/Agent/AgentIntermediate';
+import AgentSignup from './pages/Agent/AgentSignup';
+import AgentLogin from './pages/Agent/AgentLogin';
 
 function App() {
   const { logout } = useLogout()
@@ -17,26 +20,38 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className="pages">
-        {/* <div>
+          {/* <div>
             <button onClick={handleClick}>Log out</button>
           </div> */}
-          <Navbar/>
+          <Navbar />
           <Routes>
-            <Route 
+            <Route
               path="/"
               element={<Landing />}
             />
-            <Route 
-              path="/login" 
-              element={<Login />} 
+            <Route
+              path="/login"
+              element={<Login />}
             />
-            <Route 
-              path="/signup" 
-              element={<Signup />} 
+            <Route
+              path="/signup"
+              element={<Signup />}
             />
-             <Route 
-              path="/donate" 
-              element={<Intermediate />} 
+            <Route
+              path="/donate"
+              element={<Intermediate />}
+            />
+            <Route
+              path="/agent"
+              element={<AgentIntermediate />}
+            />
+            <Route
+              path="/agent/signup"
+              element={<AgentSignup />}
+            />
+            <Route
+              path="/agent/login"
+              element={<AgentLogin />}
             />
           </Routes>
         </div>
