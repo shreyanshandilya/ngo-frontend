@@ -1,0 +1,68 @@
+.landingpage {
+    background: linear-gradient(135deg, #FFC3A0, #FFAFBD, #C1D7E9, #A2C3B4);
+    background-size: 600% 600%; /* Control the size of the gradient */
+    animation: gradientAnimation 10s ease infinite; /* Control the animation duration */
+    height: 88vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.landingpage .view {
+    background-color: transparent;
+    border:2px solid black;
+    display: inline-block;
+    width: 20vw;
+    border-radius: 5px;
+    font-size: 100%;
+    float: left;
+}
+
+.landingpage .donate {      
+    background-color: transparent;
+    border:2px solid black;
+    display: inline-block;
+    width: 20vw;
+    border-radius: 5px;
+    font-size: 100%;
+    float: right;
+}
+
+.landingpage .about {
+    background-color: transparent;
+    border:2px solid black;
+    display: inline-block;
+    width : 100%;
+    border-radius: 5px;
+    font-size: 100%;
+    box-sizing: border-box;
+    margin-top: 5vh;
+}
+
+.landingpage .content {
+    display: inline-block;
+    width: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.landingpage .content div {
+    padding : 1% 0;
+    font-size: 120%;
+    cursor: pointer;
+}
+
