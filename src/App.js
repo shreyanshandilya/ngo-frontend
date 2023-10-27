@@ -7,9 +7,12 @@ import { useLogout } from './hooks/useLogout'
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Intermediate from './pages/Intermediate';
+
 import AgentIntermediate from './pages/Agent/AgentIntermediate';
 import AgentSignup from './pages/Agent/AgentSignup';
 import AgentLogin from './pages/Agent/AgentLogin';
+import View from './pages/Show';
+
 
 function App() {
   const { logout } = useLogout()
@@ -52,6 +55,10 @@ function App() {
             <Route
               path="/agent/login"
               element={<AgentLogin />}
+
+            <Route 
+              path="/view" 
+              element={<View />} 
             />
           </Routes>
         </div>
