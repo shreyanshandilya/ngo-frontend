@@ -7,6 +7,7 @@ import { useLogout } from './hooks/useLogout'
 import Navbar from './components/Navbar';
 import Landing from './components/Landing';
 import Intermediate from './pages/Intermediate';
+import View from './pages/Show';
 
 function App() {
   const { logout } = useLogout()
@@ -34,9 +35,13 @@ function App() {
               path="/signup" 
               element={<Signup />} 
             />
-             <Route 
+            <Route 
               path="/donate" 
               element={<Intermediate />} 
+            />
+            <Route 
+              path="/view" 
+              element={<View />} 
             />
           </Routes>
         </div>

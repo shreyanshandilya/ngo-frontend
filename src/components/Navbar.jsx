@@ -12,9 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from "react-router-dom";
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Products', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const loginpages = ['Agent Login'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,6 +38,10 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const loggedIn = false;
+
+  const navigate = useNavigate();
 
   return (
     <AppBar position="sticky" style={{"height":"12vh"}}>
@@ -113,6 +121,23 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>
+
+          {!loggedIn ? 
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {loginpages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+          : <></>
+          }
+
+          {loggedIn ? 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -124,7 +149,9 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
+          : <></>}
 
+          {loggedIn ? 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -154,6 +181,15 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
+          :
+          <></>}
+          {!loggedIn ? 
+            <Box sx={{ flexGrow: 0 }}>
+              <span onClick={()=>navigate("/donate")} style={{"cursor":"pointer"}}>LOGIN/SIGNUP</span>
+            </Box>
+            :
+            <></>
+          }
         </Toolbar>
       </Container>
     </AppBar>
