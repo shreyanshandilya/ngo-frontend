@@ -38,11 +38,14 @@ function Card(item) {
 
 function App() {
     const [list, setList] = useState([])
+    const [loading, setLoading] = useState(false);
     let o = []
     useEffect(() => {
+        setLoading(true)
         fetch('https://ngo-api.onrender.com/product/')
             .then(response => response.json())
             .then(data => {
+                setLoading(false)
                 for(let i=0; i<data.length; i++) {
                     o.push(Card(data[i]))
                     setList(o);
@@ -51,6 +54,7 @@ function App() {
     },[]);    
     return (
         <>
+        {loading ? <h1>Loading</h1> : <></>}
         {list}
         </>
     )
