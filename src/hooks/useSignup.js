@@ -10,10 +10,10 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('http://localhost:4000/donor/register', {
-      mode: "no-cors",
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/donor/register`, {
+      mode: "cors",
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
     console.log(response.json());
@@ -26,7 +26,7 @@ export const useSignup = () => {
       localStorage.setItem('user', JSON.stringify(response))
 
       // update the auth context
-      dispatch({type: 'LOGIN', payload: response})
+      dispatch({ type: 'LOGIN', payload: response })
 
       // update loading state
       setIsLoading(false)

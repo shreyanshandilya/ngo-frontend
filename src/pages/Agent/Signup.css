@@ -1,0 +1,58 @@
+.signup {
+    text-align: left;
+    display: block;
+    background-image: url("https://img.freepik.com/free-vector/blurred-bokeh-pattern-wallpaper-soft-touch-your-walls_1017-43483.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.signup form {
+    display: inline-block;
+    font-size: 110%;
+    width: 76vw;
+    margin-left: 10vw;
+    padding: 2vw;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    background-color: transparent;
+    /* background: rgba(0,0,0,0.1); */
+    backdrop-filter: saturate(180%) blur(200px);
+}
+
+.signup form label {
+    display: inline-block;
+    width: 100%;
+    margin: 1% 0;
+    font-weight: bold;
+}
+
+.signup form input {
+    display: inline-block;
+    width: 98%;
+    font-size: 110%;
+    padding: 1%;
+    border-radius: 2px;
+    background-color: transparent;
+    border: 1px solid black;
+}
+
+select {
+    font-size: 110%;
+    padding: 1% 0;
+}
+
+.signup form input.radio {
+    width: 5vw;
+    display: inline-block;
+}
+
+.signup button {
+    width: 100%;
+    font-size: 110%;
+    border: 0;
+    padding: 1% 0;
+    cursor: pointer;
+    margin-top: 2%;
+    color: black;
+}
