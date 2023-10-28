@@ -6,7 +6,6 @@ function Landing() {
     return (
         <div className="landingpage">
             <div className="content">
-                <div className="view">VIEW</div>
                 <div className="view" onClick={()=>navigate("/view")}>VIEW</div>
                 <div className="donate"  onClick={()=>navigate("/donate")}>DONATE</div>
                 <br></br>
