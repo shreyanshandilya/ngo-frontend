@@ -9,8 +9,8 @@ const Signup = () => {
   const [donor_address, setAddress] = useState('');
   const [donor_email, setEmail] = useState('');
   const [donor_id_type, setType] = useState('Aadhar Card');
-  const [donor_id_number, setIType] = useState(0);
-  const [donor_pan_number, setINumber] = useState('');
+  const [donor_id_number, setINumber] = useState('');
+  const [donor_pan_number, setPANNumber] = useState('');
   const [donor_anonymous, setAnonymous] = useState(0);
   const { signup, error, isLoading } = useSignup();
   const [loading, setLoading] = useState(false);
@@ -37,9 +37,9 @@ const Signup = () => {
     })
       .then(response => response.json())
       .then(json => {
-        if(json.token) {
+        if (json.token) {
           setLoading(0);
-          localStorage.setItem("token",json.token)
+          localStorage.setItem("token", json.token)
         }
         else {
           setLoading(0);
@@ -70,7 +70,10 @@ const Signup = () => {
         </select>
         <br></br>
         <label>Donor {donor_id_type} Number</label>
-        <input value={donor_pan_number} onChange={e => setINumber(e.target.value)}></input>
+        <input value={donor_id_number} onChange={e => setINumber(e.target.value)}></input>
+        <br></br>
+        <label>Donor Pan Number</label>
+        <input value={donor_pan_number} onChange={e => setPANNumber(e.target.value)}></input>
         <br></br>
         <label>Donor Anonymous</label>
         Yes
