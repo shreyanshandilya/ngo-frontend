@@ -12,6 +12,8 @@ import AgentSignup from './pages/Agent/AgentSignup';
 import AgentLogin from './pages/Agent/AgentLogin';
 import View from './pages/Show';
 import Profile from './pages/Profile';
+import DonationPage from './pages/DonationPage';
+
 
 function App() {
   const { logout } = useLogout()
@@ -55,13 +57,17 @@ function App() {
               path="/agent/login"
               element={<AgentLogin />}
             />
-            <Route 
-              path="/view" 
-              element={<View />} 
+            <Route
+              path="/view"
+              element={<View />}
             />
             <Route 
               path="/profile" 
               element={<Profile />} 
+            />
+            <Route
+              path="/donate_product"
+              element={<DonationPage />}
             />
           </Routes>
         </div>
