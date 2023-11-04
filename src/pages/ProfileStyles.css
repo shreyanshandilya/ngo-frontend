@@ -1,0 +1,30 @@
+.profile {
+    margin: 10px 0;
+    border: 1px solid black;
+    width: 80vw;
+    border-radius: 10px;
+}
+
+.profile .header .image {
+    height: 10vh;
+}
+
+.profile .header .image img {
+    height: 10vh;
+}
+
+.personalDetails {
+    display: inline-block;
+    margin: 10px 0;
+    border: 1px solid black;
+    width: 80vw;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.personalDetails .title {
+    font-weight : bold;
+    display: inline-block;
+    width: 20vw;
+    margin: 5px 0 5px 5px;
+}

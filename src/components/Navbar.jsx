@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate } from "react-router-dom";
 
-const pages = ['Products', 'Blog'];
+const pages = ['Dashboard', 'Profile', 'Donate'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const loginpages = ['Agent Login'];
@@ -42,6 +42,11 @@ function ResponsiveAppBar() {
   const loggedIn = false;
 
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    navigate("/");
+  }
 
   return (
     <AppBar position="sticky" style={{"height":"12vh"}}>
@@ -122,22 +127,6 @@ function ResponsiveAppBar() {
             LOGO
           </Typography>
 
-          {!loggedIn ? 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {loginpages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box>
-          : <></>
-          }
-
-          {loggedIn ? 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -149,47 +138,10 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          : <></>}
 
-          {loggedIn ? 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+          <Box sx={{ flexGrow: 0 }} style={{"cursor":"pointer"}} onClick={handleLogout}>
+            LOGOUT
           </Box>
-          :
-          <></>}
-          {!loggedIn ? 
-            <Box sx={{ flexGrow: 0 }}>
-              <span onClick={()=>navigate("/donate")} style={{"cursor":"pointer"}}>LOGIN/SIGNUP</span>
-            </Box>
-            :
-            <></>
-          }
         </Toolbar>
       </Container>
     </AppBar>

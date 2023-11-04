@@ -11,7 +11,7 @@ import AgentIntermediate from './pages/Agent/AgentIntermediate';
 import AgentSignup from './pages/Agent/AgentSignup';
 import AgentLogin from './pages/Agent/AgentLogin';
 import View from './pages/Show';
-
+import Profile from './pages/Profile';
 
 function App() {
   const { logout } = useLogout()
@@ -19,13 +19,13 @@ function App() {
     logout()
   }
   return (
-    <div className="App">
+    <div className="App"  style={{"backgroundColor":"lightgray"}}>
       <BrowserRouter>
         <div className="pages">
           {/* <div>
             <button onClick={handleClick}>Log out</button>
           </div> */}
-          <Navbar />
+          {/* <Navbar /> */}
           <Routes>
             <Route
               path="/"
@@ -58,6 +58,10 @@ function App() {
             <Route 
               path="/view" 
               element={<View />} 
+            />
+            <Route 
+              path="/profile" 
+              element={<Profile />} 
             />
           </Routes>
         </div>

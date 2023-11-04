@@ -13,7 +13,7 @@ function Landing() {
                 <div className="about">ABOUT<br></br> &<br></br> LEADERBOARD</div>
                 <br></br>
                 <br></br>
-                <div className="agent" onClick={() => navigate("/agent")}>Agent? Click Here</div>
+                <div className="agent" onClick={() => navigate("/agent")} style={{"color":"white"}}>Agent? Click Here</div>
             </div>
         </div>
     )

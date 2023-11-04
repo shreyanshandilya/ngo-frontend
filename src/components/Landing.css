@@ -1,54 +1,43 @@
 .landingpage {
-    background: linear-gradient(135deg, #FFC3A0, #FFAFBD, #C1D7E9, #A2C3B4);
-    background-size: 600% 600%; /* Control the size of the gradient */
-    animation: gradientAnimation 10s ease infinite; /* Control the animation duration */
-    height: 88vh;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    background-image: url("https://media.istockphoto.com/id/1250399821/vector/abstract-background-template-design-deep-blue-halftone-geometric-gradient-texture-background.jpg?s=612x612&w=0&k=20&c=eLOlhaCNscxHyoEGDjvfBUUoB7q1e8mFZMqBLCRqNNA=");
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size:100vh 100vw;
+    background-size: cover;
 }
 
 .landingpage .view {
     background-color: transparent;
-    border:2px solid black;
+    border:2px solid white;
     display: inline-block;
     width: 20vw;
     border-radius: 5px;
     font-size: 100%;
     float: left;
+    color: white;
 }
 
 .landingpage .donate {      
     background-color: transparent;
-    border:2px solid black;
+    border:2px solid white;
     display: inline-block;
     width: 20vw;
     border-radius: 5px;
     font-size: 100%;
     float: right;
+    color: white;
 }
 
 .landingpage .about {
     background-color: transparent;
-    border:2px solid black;
+    border:2px solid white;
     display: inline-block;
     width : 100%;
     border-radius: 5px;
     font-size: 100%;
     box-sizing: border-box;
     margin-top: 5vh;
+    color: white;
 }
 
 .landingpage .content {
