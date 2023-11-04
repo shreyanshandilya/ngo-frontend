@@ -11,6 +11,7 @@ import AgentIntermediate from './pages/Agent/AgentIntermediate';
 import AgentSignup from './pages/Agent/AgentSignup';
 import AgentLogin from './pages/Agent/AgentLogin';
 import View from './pages/Show';
+import DonationPage from './pages/DonationPage';
 
 
 function App() {
@@ -55,9 +56,13 @@ function App() {
               path="/agent/login"
               element={<AgentLogin />}
             />
-            <Route 
-              path="/view" 
-              element={<View />} 
+            <Route
+              path="/view"
+              element={<View />}
+            />
+            <Route
+              path="/donate_product"
+              element={<DonationPage />}
             />
           </Routes>
         </div>
