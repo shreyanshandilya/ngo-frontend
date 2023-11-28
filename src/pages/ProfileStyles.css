@@ -1,29 +1,42 @@
+.profile-level-up {
+    margin: 10px 9em;
+    display: flex;
+}
+
+img {
+    border-radius: 4px;
+    width: 40%;
+    height: auto;
+}
+
+.info {
+    position: relative;
+    bottom: 0;
+    padding: 0;
+}
+
 .profile {
     margin: 10px 0;
-    border: 1px solid black;
-    width: 80vw;
+    /* border: 1px solid black; */
+    width: 40%;
     border-radius: 10px;
 }
 
-.profile .header .image {
-    height: 10vh;
-}
-
-.profile .header .image img {
+.profile .header {
     height: 10vh;
 }
 
 .personalDetails {
     display: inline-block;
     margin: 10px 0;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 80vw;
     border-radius: 10px;
     text-align: left;
 }
 
 .personalDetails .title {
-    font-weight : bold;
+    font-weight: bold;
     display: inline-block;
     width: 20vw;
     margin: 5px 30px 5px 5px;
