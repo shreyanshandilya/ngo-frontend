@@ -100,11 +100,23 @@ function ResponsiveAppBar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
+            <MenuItem
+                key={1}
+                onClick={()=>navigate("/profile")}
+              >
+              <Typography textAlign="center">DASHBOARD</Typography>
+              </MenuItem>
+              <MenuItem
+                key={2}
+                onClick={()=>navigate("/donate_product")}
+              >
+              <Typography textAlign="center">DONATE</Typography>
+              </MenuItem>
+              {/* {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -128,15 +140,20 @@ function ResponsiveAppBar() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
+            <Button
+                key={1}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={()=>navigate("/profile")}
               >
-                {page}
+              DASHBOARD
               </Button>
-            ))}
+              <Button
+                key={2}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={()=>navigate("/donate_product")}
+              >
+              DONATE
+              </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }} style={{"cursor":"pointer"}} onClick={handleLogout}>

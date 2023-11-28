@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
 import './Signup.css'
+import {useNavigate} from "react-router-dom";
 
 const Signup = () => {
-
+  const navigate = useNavigate();
   const [donor_name, setName] = useState('');
   const [donor_mob_number, setNumber] = useState('');
   const [donor_address, setAddress] = useState('');
@@ -40,6 +41,7 @@ const Signup = () => {
         if (json.token) {
           setLoading(0);
           localStorage.setItem("token", json.token)
+          navigate("/profile");
         }
         else {
           setLoading(0);

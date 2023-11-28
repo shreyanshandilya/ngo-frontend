@@ -1,5 +1,5 @@
 .landingpage {
-    background-image: url("https://media.istockphoto.com/id/1250399821/vector/abstract-background-template-design-deep-blue-halftone-geometric-gradient-texture-background.jpg?s=612x612&w=0&k=20&c=eLOlhaCNscxHyoEGDjvfBUUoB7q1e8mFZMqBLCRqNNA=");
+    background-image: url("https://blog-frontend.envato.com/cdn-cgi/image/width=2400,quality=75,format=auto/uploads/sites/2/2021/09/CON190%E2%80%93SeptemberBlog-Bauhaus.jpg");
     height: 100vh;
     background-repeat: no-repeat;
     background-size:100vh 100vw;
@@ -7,51 +7,61 @@
 }
 
 .landingpage .view {
-    background-color: transparent;
-    border:2px solid white;
-    display: inline-block;
-    width: 20vw;
+    background-color: red;
     border-radius: 5px;
+    display: inline-block;
+    width: 40%;
     font-size: 100%;
     float: left;
     color: white;
 }
 
 .landingpage .donate {      
-    background-color: transparent;
-    border:2px solid white;
-    display: inline-block;
-    width: 20vw;
+    background-color: red;
     border-radius: 5px;
+    display: inline-block;
+    width: 40%;
     font-size: 100%;
     float: right;
     color: white;
 }
 
 .landingpage .about {
-    background-color: transparent;
-    border:2px solid white;
+    background-color: red;
+    border-radius: 5px;
     display: inline-block;
     width : 100%;
-    border-radius: 5px;
     font-size: 100%;
     box-sizing: border-box;
-    margin-top: 5vh;
     color: white;
+    margin-top: 2%;
 }
 
 .landingpage .content {
     display: inline-block;
-    width: 50vw;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 100vh;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .landingpage .content div {
     padding : 1% 0;
-    font-size: 120%;
+    font-size: 100%;
     cursor: pointer;
 }
 
+.landingpage .content .logo {
+    height: 15vh;
+}
+
+.landingpage .content .text {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    margin: 0 15%;
+}

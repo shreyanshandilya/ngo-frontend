@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import './Signup.css'
+import Navbar from '../components/Navbar';
 
 const DonationPage = () => {
 
@@ -8,15 +9,29 @@ const DonationPage = () => {
     const [product_description_before, setDescription] = useState('');
     const [product_defects_before, setDefects] = useState('');
     const [product_area_of_donation, setArea] = useState('');
-    const [donor_mob_number, setDonor] = useState('');
     const [loading, setLoading] = useState(false);
     const [Error, setError] = useState(false);
+
+    const [donor, setDonor] = useState({});
+    const token = localStorage.getItem("token")
+    useEffect(() => {
+        setLoading(true)
+        fetch('https://ngo-api.onrender.com/donor/view', {
+            headers : {"Authorization" : `Bearer ${token}`}
+        })
+            .then(response => response.json())
+            .then(data => {
+                setDonor(data)
+                setLoading(false)
+            });
+    },[]);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(1);
         let data = {
-            product_title, product_category, product_description_before, product_defects_before, product_area_of_donation, donor_mob_number
+            product_title, product_category, product_description_before, product_defects_before, product_area_of_donation, 
+            donor_mob_number : donor["donor"]["donor_mob_number"]
         }
         await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
             method: "POST",
@@ -27,18 +42,16 @@ const DonationPage = () => {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.token) {
-                    setLoading(0);
-                }
-                else {
-                    setLoading(0);
-                    setError(1);
-                }
+                console.log(json)
             });
     }
 
     return (
+        <>
+        <Navbar/>
         <div className="signup">
+            { !donor["donor"] ? <>Loading</> : <></>}
+            { donor["donor"] ? <>
             <form>
                 <h1>Enter Product Details</h1>
                 <label>Title</label>
@@ -56,8 +69,6 @@ const DonationPage = () => {
                 <label>Area of Donation</label>
                 <input value={product_area_of_donation} onChange={e => setArea(e.target.value)}></input>
                 <br></br>
-                <label>Donor Mobile Number</label>
-                <input value={donor_mob_number} onChange={e => setDonor(e.target.value)}></input>
                 <br></br>
                 <button type="submit" onClick={handleSubmit}>
                     Submit
@@ -66,7 +77,9 @@ const DonationPage = () => {
                 {Error ? <div>Some error occured</div> : <></>}
                 <br></br>
             </form>
+            </> : <></>}
         </div>
+        </>
     )
 }
 

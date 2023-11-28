@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
 import axios from "axios"
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(0)
@@ -31,6 +33,7 @@ const Login = () => {
           localStorage.setItem("token",json.token)
           console.log(json.token)
           setSuccess(1)
+          navigate("/profile");
         }
         else {
           setLoading(0);

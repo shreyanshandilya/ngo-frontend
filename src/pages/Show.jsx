@@ -2,6 +2,9 @@ import {useEffect, useState} from "react";
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import { Link } from "react-router-dom"; 
+import NavbarLogged from "../components/NavbarLogged";
+import NavbarLogout from "../components/NavbarLogout";
+import { Navbar } from "flowbite-react";
 
 const divStyle = {
   display: 'flex',
@@ -14,8 +17,9 @@ const divStyle = {
 
 
 function Card(item) {
+    const route = `/view/${item["_id"]}`
     return (
-    <div style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "margin":"2% 0", "textAlign":"left", "padding":"2%"}}>
+    <div style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "margin":"2% 0", "textAlign":"left", "padding":"2%", "backgroundColor":"white"}}>
         <p style={{"fontSize":"150%"}}><strong>{item["product_title"]}</strong></p>
         <p style={{"fontSize":"120%"}}><strong>Category</strong> {item.product_category}</p>
         <Slide>
@@ -30,13 +34,14 @@ function Card(item) {
         <p><strong>Defects </strong>{item.product_defects_before}</p>
         <p><strong>Area of Donation </strong> {item.product_area_of_donation}</p>
         <center>
-            <Link to="/" style={{"textDecoration":"none"}}><p style={{"width":"50vw", "border":"1px solid black", "fontWeight":"bold", "cursor":"pointer", "padding":"1%", "color":"black"}}>VIEW</p></Link>
+            <Link to ={route} style={{"textDecoration":"none"}}><p style={{"width":"50vw", "border":"1px solid black", "fontWeight":"bold", "cursor":"pointer", "padding":"1%", "color":"black"}}>VIEW</p></Link>
         </center>
     </div>
     )
 }
 
 function App() {
+    const [isExpired, setExpired] = useState(true);
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(false);
     let o = []
@@ -51,11 +56,21 @@ function App() {
                     setList(o);
                 }
             });
+            const token = localStorage.getItem("token")
+            if(token) {
+                const JWT = token;
+                const jwtPayload = JSON.parse(window.atob(JWT.split('.')[1]))
+                setExpired(Date.now() >= jwtPayload.exp * 1000);
+            }
     },[]);    
     return (
         <>
+        {!isExpired ? <NavbarLogged/> : <></>}
+        {isExpired ? <NavbarLogout/> : <></>}
         {loading ? <h1>Loading</h1> : <></>}
-        {list}
+        <div style={{"padding":"5%", "backgroundColor":"lightgray"}}>
+            {list}
+        </div>
         </>
     )
 }

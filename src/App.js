@@ -13,7 +13,7 @@ import AgentLogin from './pages/Agent/AgentLogin';
 import View from './pages/Show';
 import Profile from './pages/Profile';
 import DonationPage from './pages/DonationPage';
-
+import Show1 from './pages/Show1';
 
 function App() {
   const { logout } = useLogout()
@@ -21,7 +21,7 @@ function App() {
     logout()
   }
   return (
-    <div className="App"  style={{"backgroundColor":"lightgray"}}>
+    <div className="App">
       <BrowserRouter>
         <div className="pages">
           {/* <div>
@@ -68,6 +68,10 @@ function App() {
             <Route
               path="/donate_product"
               element={<DonationPage />}
+            />
+            <Route
+              path="/view/:formId"
+              element={<Show1 />}
             />
           </Routes>
         </div>
