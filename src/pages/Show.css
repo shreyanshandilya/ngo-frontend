@@ -52,3 +52,6 @@
     transition: background-color 0.3s ease;
     border: 1px solid #129bf6a2;
 }
+button:hover {
+    background-color: rgba(41, 127, 185, 0.69);
+}
