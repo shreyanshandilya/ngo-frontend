@@ -1,4 +1,4 @@
-import './Intermediate.css';
+import '../Intermediate.css';
 import { useNavigate } from "react-router-dom";
 
 function AgentIntermediate() {

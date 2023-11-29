@@ -3,9 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../images/donatebg.svg"); /* Replace 'your-image-url.jpg' with the actual path to your image */
-    background-size: cover;
-    background-position: center;
 }
 
 .login {
@@ -72,4 +69,10 @@ button:hover {
 
 #loading {
     color: #3498db;
+}
+
+@media (max-width: 700px) {
+    .login {
+        margin: 0 5%;
+    }
 }

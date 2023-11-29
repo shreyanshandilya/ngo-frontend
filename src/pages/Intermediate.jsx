@@ -7,7 +7,12 @@ function Intermediate() {
         <div className="page">
             <div className="button-container">
                 <center>
-                    <div className="button" onClick={() => navigate("/login")}>Existing Donor? Login</div>
+                    <div
+                        className="button"
+                        onClick={() => navigate("/login")}
+                    >
+                        Existing Donor? Login
+                    </div>
                     <div className="button" onClick={() => navigate("/signup")}>New Donor? Sign Up</div>
                 </center>
             </div>

@@ -3,9 +3,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("../images/donatebg.svg"); /* Replace 'your-image-url.jpg' with the actual path to your image */
-    background-size: cover;
-    background-position: center;
 }
 
 .button-container {
@@ -16,37 +13,38 @@
     border-radius: 8px;
     padding: 2em;
     margin: 0 20%;
-    background-color: #f8f9facc; /* Light background color */
+    background-color: #f8f9facc;
 }
 
 .button {
     display: inline-block;
-    padding: 10px 15px; /* Adjusted padding for a smaller width */
-    margin: 10px;
-    width: 40vw;
+    padding: 1% 1.5%;
+    margin: 1%;
     cursor: pointer;
     background-color: #2a9be7a2;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    font-size: 3em;
     transition: background-color 0.3s ease;
-    width: 20vw;
-    padding: 1%;
-    margin-top: 2%;
-    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
     cursor: pointer;
+    width: 30vw;
 }
 
 .button:hover {
     background-color: rgba(41, 127, 185, 0.69);
 }
 
-.button {
-    width: 20vw;
-    padding: 1%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 2%;
-    border-radius: 10px;
-    cursor: pointer;
+@media (max-width: 700px) {
+    .button-container {
+        height: 20%;
+        margin: 0 5%;
+        padding: 1em;
+        justify-content: center;
+    }
+    .button {
+        width: max-content;
+        font-size: 0.5em;
+    }
 }
