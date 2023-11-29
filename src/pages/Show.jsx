@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import NavbarLogged from "../components/NavbarLogged";
 import NavbarLogout from "../components/NavbarLogout";
 import { Navbar } from "flowbite-react";
+import './Show.css'
 
 const divStyle = {
   display: 'flex',
@@ -19,23 +20,30 @@ const divStyle = {
 function Card(item) {
     const route = `/view/${item["_id"]}`
     return (
-    <div style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "margin":"2% 0", "textAlign":"left", "padding":"2%", "backgroundColor":"white"}}>
-        <p style={{"fontSize":"150%"}}><strong>{item["product_title"]}</strong></p>
-        <p style={{"fontSize":"120%"}}><strong>Category</strong> {item.product_category}</p>
-        <Slide>
-         {item.product_pictures_before.map((slideImage, index)=> (
-            <div key={index}>
-              <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
-              </div>
+    <div className="productCard" style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "margin":"2% 0", "textAlign":"left", "padding":"2%"}}>
+            <div className="SliderDiv">
+                <Slide>
+                {item.product_pictures_before.map((slideImage, index)=> (
+                    <div key={index}>
+                    <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                    </div>
+                    </div>
+                ))} 
+                </Slide>
             </div>
-          ))} 
-        </Slide>
-        <p><strong>Description </strong><br></br>{item.product_description_before}</p>
-        <p><strong>Defects </strong>{item.product_defects_before}</p>
-        <p><strong>Area of Donation </strong> {item.product_area_of_donation}</p>
-        <center>
-            <Link to ={route} style={{"textDecoration":"none"}}><p style={{"width":"50vw", "border":"1px solid black", "fontWeight":"bold", "cursor":"pointer", "padding":"1%", "color":"black"}}>VIEW</p></Link>
-        </center>
+            
+        <div className="productDetailsDiv">
+            <p style={{"fontSize":"150%"}}><strong>{item["product_title"]}</strong></p>
+            <p style={{"fontSize":"120%"}}><strong>Category</strong> {item.product_category}</p>
+            
+            <p><strong>Description </strong><br></br>{item.product_description_before}</p>
+            <p><strong>Defects </strong>{item.product_defects_before}</p>
+            <p><strong>Area of Donation </strong> {item.product_area_of_donation}</p>
+            <center>
+                <Link className="button" to ={route} style={{"textDecoration":"none"}}><p>VIEW</p></Link>
+            </center>
+        </div>
+        
     </div>
     )
 }
