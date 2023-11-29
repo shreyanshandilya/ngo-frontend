@@ -20,7 +20,11 @@ const divStyle = {
 function Card(item) {
     const route = `/view/${item["_id"]}`
     return (
-    <div className="productCard" style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "margin":"2% 0", "textAlign":"left", "padding":"2%"}}>
+
+    <>
+
+    <div className="showPage">
+    <div className="productCard" style={{"borderTop":"1px solid black", "borderBottom":"1px solid black", "textAlign":"left"}}>
             <div className="SliderDiv">
                 <Slide>
                 {item.product_pictures_before.map((slideImage, index)=> (
@@ -45,6 +49,10 @@ function Card(item) {
         </div>
         
     </div>
+    </div>
+        
+    </>
+    
     )
 }
 
@@ -76,7 +84,7 @@ function App() {
         {!isExpired ? <NavbarLogged/> : <></>}
         {isExpired ? <NavbarLogout/> : <></>}
         {loading ? <h1>Loading</h1> : <></>}
-        <div style={{"padding":"5%", "backgroundColor":"lightgray"}}>
+        <div style={{"backgroundColor": "none"}}>
             {list}
         </div>
         </>
