@@ -15,8 +15,10 @@
     padding: 1em;
     border-radius: 8px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     max-width: 1200px;
-    width: 100%;
+    width: 95%;
     flex-direction: column;
     border-radius: 8px;
     margin: 0 20%;
@@ -30,8 +32,10 @@
     padding: 1em;
     border-radius: 8px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
     max-width: 1200px;
-    width: 100%;
+    width: 95%;
     flex-direction: row;
     border-radius: 8px;
     margin: 0 20%;
@@ -40,14 +44,15 @@
 }
 
 .content-inside {
-    padding: 1em;
+    padding: 0.5em;
     border-radius: 8px;
     text-align: center;
+    align-items: center;
     max-width: 1200px;
-    width: auto;
+    width: 80%;
     flex-direction: column;
     border-radius: 8px;
-    margin-top: 4%;
+    margin-top: 0;
     display: flex;
 }
 
@@ -71,6 +76,11 @@ h2 {
 h3 {
     color: #1c1b1b;
     margin-bottom: 20px;
+}
+
+h4 {
+    margin: 0;
+    padding: 2%;
 }
 
 .view,
@@ -113,4 +123,41 @@ h3 {
 .round-img {
     border-radius: 50%;
     width: 25%;
+    height: 25%;
+    margin-left: 0;
+    margin: auto;
+    padding: 2em;
+}
+
+li {
+    margin-top: 0.5vh;
+}
+
+@media (max-width: 700px) {
+    .content-row {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin: 2% 0;
+        padding: 0;
+        width: 95%;
+    }
+    .content {
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin: 0 0;
+        padding: 0;
+        width: 95%;
+    }
+    .round-img {
+        border-radius: 50%;
+        width: 50%;
+        height: 50%;
+    }
+    .content {
+        margin: 2% 5% 2% 5%;
+    }
 }
