@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import './Login.css'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,26 +44,35 @@ const Login = () => {
   }
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <h3>Log In</h3>
+    <div className="container">
+      <form className="login" onSubmit={handleSubmit}>
+        <h2>Log In as Donor</h2>
+        <div className="form_input">
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="password">Mobile Number:</label>
+          <input
+            id="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button type="submit">Log in</button>
+        {loading ? <div id="loading">Logging in... Please wait</div> : <></>}
+        {err ? <div className="error">Please recheck your credentials</div> : <></>}
+        {Success ? <div id="success">Success</div> : <></>}
+      </form>
+    </div>
 
-      <label>Email :</label>
-      <input
-        type="email"
-        onChange={(e) => setEmail(e.target.value)}
-        value={email}
-      />
-      <label>Mobile Number :</label>
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <button onClick={handleSubmit}>Log in</button>
-      {loading ? <div>Logging in.. Please wait</div> : <></>}
-      {err ? <div className="error">Please recheck your username</div> : <></>}
-      {Success ? <div>Success</div> : <></>}
-    </form>
   )
 }
 

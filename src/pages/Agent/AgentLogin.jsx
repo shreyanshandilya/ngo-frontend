@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useLogin } from "../../hooks/useLogin"
 import axios from "axios"
+import '../Login'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -40,26 +41,35 @@ const Login = () => {
   }
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
-      <h3>Log In</h3>
-
-      <label>Username :</label>
-      <input
-        type="Username"
-        onChange={(e) => setUsername(e.target.value)}
-        value={username}
-      />
-      <label>Password :</label>
-      <input
-        type="password"
-        onChange={(e) => setPassword(e.target.value)}
-        value={password}
-      />
-      <button onClick={handleSubmit}>Log in</button>
-      {loading ? <div>Logging in.. Please wait</div> : <></>}
-      {err ? <div className="error">Please recheck your Username</div> : <></>}
-      {Success ? <div>Success</div> : <></>}
-    </form>
+    <div className="container">
+      <form className="login" onSubmit={handleSubmit}>
+        <h2>Log In as Agent</h2>
+        <div className="form_input">
+          <label htmlFor="username">Username :</label>
+          <input
+            name="username"
+            id="username"
+            type="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            value={username}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="password">Password :</label>
+          <input
+            name="password"
+            id="password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </div>
+        <button onClick={handleSubmit}>Log in</button>
+        {loading ? <div>Logging in.. Please wait</div> : <></>}
+        {err ? <div className="error">Please recheck your Username</div> : <></>}
+        {Success ? <div>Success</div> : <></>}
+      </form>
+    </div>
   )
 }
 

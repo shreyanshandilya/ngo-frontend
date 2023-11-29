@@ -60,53 +60,119 @@ const AgentSignup = () => {
       });
   }
   return (
-    <div className="signup">
-      <form>
-        <h1>SIGN UP</h1>
-        <label>Agent Name</label>
-        <input value={agent_name} onChange={e => setName(e.target.value)}></input>
-        <br></br>
-        <label>Aadhar Number</label>
-        <input value={agent_aadhar_number} onChange={e => setAadharNumber(e.target.value)}></input>
-        <br></br>
-        <label>Operation Area</label>
-        <input value={agent_operation_area} onChange={e => setOperationArea(e.target.value)}></input>
-        <br></br>
-        <label>Address</label>
-        <input value={agent_address} onChange={e => setAddress(e.target.value)}></input>
-        <br></br>
-        <label>Mobile Number</label>
-        <input value={agent_mob_number} onChange={e => setNumber(e.target.value)}></input>
-        <br></br>
-        <label>Email</label>
-        <input value={agent_email} onChange={e => setEmail(e.target.value)}></input>
-        <br></br>
+    <div className="conts">
+      <form className="form">
+        <h1>Agent Registration</h1>
+        <div className="form_input">
+          <label htmlFor="agent_name">Agent Name</label>
+          <input
+            id="agent_name"
+            name="agent_name"
+            value={agent_name}
+            onChange={e => setName(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_aadhar_number">Aadhar Number</label>
+          <input
+            name="agent_aadhar_number"
+            id="agent_aadhar_number"
+            value={agent_aadhar_number}
+            onChange={e => setAadharNumber(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_operation_area">Operation Area</label>
+          <input
+            name="agent_operation_area"
+            id="agent_operation_area"
+            value={agent_operation_area}
+            onChange={e => setOperationArea(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_address">Address</label>
+          <input
+            name="agent_address"
+            id="agent_address"
+            value={agent_address}
+            onChange={e => setAddress(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_mob_number">Mobile Number</label>
+          <input
+            id="agent_mob_number"
+            name="agent_mob_number"
+            value={agent_mob_number}
+            onChange={e => setNumber(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_email">Email</label>
+          <input
+            id="agent_email"
+            name="agent_email"
+            value={agent_email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            value={username}
+            onChange={e => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            value={password}
+            type="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="agent_id_type">Id Type</label>
+          <select
+            id="agent_id_type"
+            name="agent_id_type"
+            value={agent_id_type}
+            onChange={e => setType(e.target.value)}
+          >
+            {list}
+          </select>
+        </div>
+        <div className="form_input">
+          <label htmlFor="active">Active</label>
+          <div className="radio-container">
+            Yes
+            <input
+              type="radio"
+              value={agent_active}
+              name="active"
+              onChange={(e) => {
+                if (agent_active == 0) setActive(1);
+              }} className="radio" />
+            No
+            <input
+              type="radio"
+              value="No"
+              name="active"
+              onChange={(e) => {
+                if (agent_active == 1) setActive(0);
+              }} className="radio" />
+          </div>
+        </div>
 
-        <label>Username</label>
-        <input value={username} onChange={e => setUsername(e.target.value)}></input>
-        <br></br>
-        <label>Password</label>
-        <input value={password} type="password" onChange={e => setPassword(e.target.value)}></input>
-        <br></br>
-
-        <label>Agent Id Type</label>
-        <select onChange={e => setType(e.target.value)}>
-          {list}
-        </select>
-        <br></br>
-        <label>Active</label>
-        Yes
-        <input type="radio" value={agent_active} name="active" onChange={(e) => {
-          if (agent_active == 0) setActive(1);
-        }} className="radio"></input>
-        No
-        <input type="radio" value="No" name="active" onChange={(e) => {
-          if (agent_active == 1) setActive(0);
-        }} className="radio"></input>
-        <br></br>
         <button type="submit" onClick={handleSubmit}>
           Submit
         </button>
+
         {loading ? <div>Signing you up.. Please wait</div> : <></>}
         {Error ? <div>Looks like the given account is already signed up</div> : <></>}
       </form>

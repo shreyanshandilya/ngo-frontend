@@ -5,10 +5,10 @@ function Intermediate() {
     const navigate = useNavigate();
     return (
         <div className="page">
-            <div className="content">
+            <div className="button-container">
                 <center>
-                    <div className="button" onClick={()=>navigate("/login")}>Existing User? Login</div>
-                    <div className="button" onClick={()=>navigate("/signup")}>New User? Sign Up</div>
+                    <div className="button" onClick={() => navigate("/login")}>Existing Donor? Login</div>
+                    <div className="button" onClick={() => navigate("/signup")}>New Donor? Sign Up</div>
                 </center>
             </div>
         </div>
