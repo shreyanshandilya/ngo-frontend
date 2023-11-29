@@ -1,43 +1,104 @@
 .profile-level-up {
-    margin: 10px 9em;
+    margin: 5% 15% 5% 15%;
     display: flex;
+    background-color: #f8f9facc;
+    border-radius: 8px;
+    width: 70%;
+    align-items: center;
 }
 
 img {
     border-radius: 4px;
-    width: 40%;
+    width: 80%;
     height: auto;
 }
 
-.info {
-    position: relative;
-    bottom: 0;
-    padding: 0;
-}
-
 .profile {
-    margin: 10px 0;
-    /* border: 1px solid black; */
-    width: 40%;
     border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    width: 35%;
 }
 
-.profile .header {
+.profile-pic {
+    border-radius: 50%;
+}
+
+.header {
     height: 10vh;
 }
 
 .personalDetails {
     display: inline-block;
     margin: 10px 0;
-    /* border: 1px solid black; */
-    width: 80vw;
     border-radius: 10px;
     text-align: left;
+    align-items: center;
+    justify-content: center;
 }
 
-.personalDetails .title {
+.title {
     font-weight: bold;
     display: inline-block;
-    width: 20vw;
-    margin: 5px 30px 5px 5px;
+    margin: 4px 20px 4px 4px;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.product-list {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.strip {
+    display: flex;
+    align-items: center;
+}
+
+.description {
+    margin-left: 5%;
+}
+
+@media (max-width: 700px) {
+    .profile-level-up {
+        margin: 10% 5% 2% 5%;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    .personalDetails {
+        text-align: center;
+    }
+    .profile {
+        width: 75%;
+        display: flex;
+    }
+    .title {
+        font-weight: bold;
+        display: inline-block;
+        margin: 4px 10px 4px 4px;
+    }
+    .strip {
+        display: flex;
+        flex-direction: row;
+    }
+    .donate-button {
+        position: relative;
+        margin: 0 0 0 20%;
+    }
+
+    .product {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0%;
+    }
 }
