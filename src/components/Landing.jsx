@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import rest from '../images/rest.jpg'
 import prod from '../images/prod.jpg';
 import don from '../images/don.jpg'
+import Navbar from './NavbarLogged.jsx'
 
 function Landing() {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ function Landing() {
     const description = "Welcome to our NGO site where we collect, restore and donate used products. We believe in sustainable living and improving lives by recycling.";
     return (
         <>
+            <Navbar/>
             <div className="landingpage">
                 <div className="content-row" style={{ 'margin-top': '5vh' }}>
                     <img className='round-img' src={don}></img>
