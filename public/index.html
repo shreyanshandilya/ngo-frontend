@@ -48,7 +48,28 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <!-- MDB -->
-      
-  </body>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/vendor/three.r119.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@0.5.21/dist/vanta.globe.min.js"></script>
+<script>
+VANTA.GLOBE({
+  //Add the id of your tag with the # before
+    el: "#root",  //All the controles for the user
+    mouseControls: false,
+    touchControls: false,
+    gyroControls: false,
+  //Control the min-size of the animation
+    minHeight: 500.00,
+    minWidth: 500.00,
+  //Modify the sizing
+    scale: 1.00,
+    scaleMobile: 1.00,
+    size:0.90,
+  //Customise the colors
+    color: 0x40db33,
+    color2: 0x4f17ef,
+    backgroundColor: 0xd83423
+  })
+</script>
+
+</body>
 </html>

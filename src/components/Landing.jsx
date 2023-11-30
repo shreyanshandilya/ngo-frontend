@@ -1,4 +1,4 @@
-import './Landing.css';
+// import './Landing.css';
 import { useNavigate } from "react-router-dom";
 import rest from '../images/rest.jpg'
 import prod from '../images/prod.jpg';
