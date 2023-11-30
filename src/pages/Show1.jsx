@@ -3,6 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import { useParams } from "react-router-dom";
 import './Show1.css'
+import { AuthVerify } from "../helper/JWTVerify";
 
 const divStyle = {
     display: 'flex',
@@ -17,7 +18,140 @@ function Individual() {
     const { formId } = useParams();
     const [loading, setLoading] = useState(false);
     const [item, setItem] = useState({});
+    const [agent, setAgent] = useState("0");
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [loading1, setLoading1] = useState(false);
+    const [repairModal, setRepairModal] = useState(false);
+    const [info, setDefects] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+
+    const claim = () => {
+        setLoading1(true)
+        setError(false)
+        let data = {
+            product_id: formId,
+            agent_id: agent
+        }
+        fetch(`https://ngo-api.onrender.com/product/assign_agent`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.error) {
+                    setError(true);
+                    setLoading1(false)
+                }
+                else {
+                    setSuccess(true);
+                    setLoading1(false);
+                }
+            });
+    }
+
+    const collect = () => {
+        setLoading1(true)
+        let data = {
+            product_id: formId,
+            agent_id: agent
+        }
+        fetch(`https://ngo-api.onrender.com/product/collect`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.message == "Product succesfully collected") {
+                    setSuccess(true);
+                    setLoading1(false);
+                }
+                else {
+                    setError(true);
+                    setLoading1(false)
+                }
+            });
+    }
+
+    const repair = () => {
+        setRepairModal(true)
+    }
+
+    const repairSubmit = (e) => {
+        setError(0)
+        e.preventDefault();
+        let data = {
+            product_id: formId,
+            agent_id: agent,
+            product_description_after: description,
+            product_defects_after: info,
+            prodcut_repair_amount: price
+        }
+        fetch(`https://ngo-api.onrender.com/product/repair`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.message == "Product details Succesfully Updated") {
+                    setSuccess(true);
+                    setLoading1(false);
+                }
+                else {
+                    setError(true);
+                    setLoading1(false)
+                }
+            });
+    }
+
+    const handover = () => {
+        setLoading1(true)
+        setError(false)
+        let data = {
+            product_id: formId,
+            agent_id: agent
+        }
+        fetch(`https://ngo-api.onrender.com/product/receive`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.error) {
+                    setError(true);
+                    setLoading1(false)
+                }
+                else {
+                    setSuccess(true);
+                    setLoading1(false);
+                }
+            });
+    }
+
     useEffect(() => {
+        if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") == "agent") {
+            const token = localStorage.getItem("token")
+            fetch('https://ngo-api.onrender.com/agent/view', {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    setAgent(data["agent"]["_id"])
+                });
+        }
         setLoading(true)
         fetch(`https://ngo-api.onrender.com/product/${formId}`)
             .then(response => response.json())
@@ -53,8 +187,97 @@ function Individual() {
                             <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
                         </div>
-
                     </div>
+                    {(agent != "0") ?
+                        <>
+                            {item.product_agent ?
+                                (item.product_agent["_id"] === agent ?
+                                    <>
+                                        {!item.product_collection_status ? <>
+                                            <button onClick={collect}>COLLECT</button>
+                                            {error ? <p>ERROR! Please try again</p> : <></>}
+                                            {success ? <p>Successfully Collected!</p> : <></>}
+                                            {loading1 ? <p>Processing Request....</p> : <></>}
+                                        </> : (
+                                            <>
+                                                {!item.product_repair_status ?
+                                                    <>
+                                                        <button onClick={repair}>REPAIR</button>
+                                                        {repairModal ? <>
+                                                            <form>
+                                                                <div className="form_input">
+                                                                    <label htmlFor="description">Description:</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="description"
+                                                                        name="description"
+                                                                        value={description}
+                                                                        onChange={(e) => setDescription(e.target.value)}
+                                                                    />
+                                                                </div>
+                                                                <div className="form_input">
+                                                                    <label htmlFor="defects">Defects:</label>
+                                                                    <input
+                                                                        id="defects"
+                                                                        name="defects"
+                                                                        value={info}
+                                                                        onChange={(e) => setDefects(e.target.value)}
+                                                                    />
+                                                                </div>
+                                                                <div className="form_input">
+                                                                    <label htmlFor="price">Price:</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="price"
+                                                                        name="price"
+                                                                        value={price}
+                                                                        onChange={(e) => setPrice(e.target.value)}
+                                                                    />
+                                                                </div>
+                                                                <button onClick={repairSubmit}>SUBMIT</button>
+                                                                {error ? <p>ERROR! Please try again</p> : <></>}
+                                                                {success ? <p>Successfully Submitted!</p> : <></>}
+                                                                {loading1 ? <p>Processing Request....</p> : <></>}
+                                                            </form>
+                                                        </> : <></>}
+                                                    </>
+                                                    : <></>}
+                                            </>
+                                        )
+                                        }</>
+                                    : <></>)
+                                :
+                                <>
+                                    <button onClick={claim}>CLAIM</button>
+                                    {error ? <p>ERROR! Please try again</p> : <></>}
+                                    {success ? <p>Successfully Claimed!</p> : <></>}
+                                    {loading1 ? <p>Processing Request....</p> : <></>}
+                                </>}
+                        </>
+                        : <></>
+                    }
+                    {item.product_repair_status && !item.product_received ?
+                        <>
+                            <button onClick={handover}>
+                                HANDOVER
+                            </button>
+                            {error ? <p>ERROR! Please try again</p> : <></>}
+                            {success ? <p>Successfully Donated!</p> : <></>}
+                            {loading1 ? <p>Processing Request....</p> : <></>}
+                        </> :
+
+                        <></>
+                    }
+
+                    {item.product_received ?
+                        <>
+                            <button>
+                                DONATED
+                            </button>
+                        </> :
+
+                        <></>
+                    }
                     <div className="donorInfo">
                         <p style={{ "fontSize": "200%" }}><strong>Donor Details</strong></p>
                         <p><strong>Name:  </strong>{item.product_donor.donor_name}</p>
@@ -62,8 +285,6 @@ function Individual() {
                         <p><strong>Address:  </strong>{item.product_donor.donor_address}</p>
                         <p><strong>Email:  </strong>{item.product_donor.donor_email}</p>
                     </div>
-
-
                 </> : <></>}
         </>
     )

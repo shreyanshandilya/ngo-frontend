@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import './ProfileStyles.css';
 import 'react-slideshow-image/dist/styles.css';
 import { Link } from "react-router-dom";
-import prod from '../images/prod.jpg'
+import prod from '../../images/prod.jpg'
 import { useNavigate } from "react-router-dom";
-import { AuthVerify } from "../helper/JWTVerify";
+import { AuthVerify } from "../../helper/JWTVerify";
 
 function Card(item) {
     const url = `/view/${item["_id"]}`
@@ -31,10 +31,10 @@ function Profile() {
     const products = [];
     useEffect(() => {
         setLoading(true)
-        if(AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role")!="donor") {
-            navigate("/");
+        if(AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role")!="agent") {
+            navigate('/');
         }
-        fetch('https://ngo-api.onrender.com/donor/view', {
+        fetch('https://ngo-api.onrender.com/agent/view', {
             headers: { "Authorization": `Bearer ${token}` }
         })
             .then(response => response.json())
@@ -43,11 +43,11 @@ function Profile() {
                 setLoading(false)
             });
     }, []);
-    if (donor["donor"]) donor["donor"]["donor_products"].map(product => products.push(Card(product)))
+    if (donor["agent"]) donor["agent"]["agent_products"].map(product => products.push(Card(product)))
     return (
         <>
-            {!donor["donor"] ? <h1>Loading</h1> : <></>}
-            {donor["donor"] ?
+            {!donor["agent"] ? <h1>Loading</h1> : <></>}
+            {donor["agent"] ?
                 <>
                     <div className='profile-level-up'>
                         <div className="profile" >
@@ -56,31 +56,31 @@ function Profile() {
                         <div className="personalDetails">
                             <div>
                                 <span className="title">Name:</span>
-                                <span className="answer">{donor["donor"]["donor_name"]}</span>
+                                <span className="answer">{donor["agent"]["agent_name"]}</span>
                             </div>
                             <div>
                                 <span className="title">Mobile Number:</span>
-                                <span className="answer">{donor["donor"]["donor_mob_number"]}</span>
+                                <span className="answer">{donor["agent"]["agent_mob_number"]}</span>
                             </div>
                             <div>
                                 <span className="title">Email:</span>
-                                <span className="answer">{donor["donor"]["donor_email"]}</span>
+                                <span className="answer">{donor["agent"]["agent_email"]}</span>
                             </div>
                             <div>
                                 <span className="title">Address:</span>
-                                <span className="answer">{donor["donor"]["donor_address"]}</span>
+                                <span className="answer">{donor["agent"]["agent_address"]}</span>
                             </div>
                             <div>
                                 <span className="title">ID Type:</span>
-                                <span className="answer">{donor["donor"]["donor_id_type"]}</span>
+                                <span className="answer">{donor["agent"]["agent_id_type"]}</span>
                             </div>
                             <div>
-                                <span className="title">{donor["donor"]["donor_id_type"]} Number:</span>
-                                <span className="answer">{donor["donor"]["donor_id_number"]}</span>
+                                <span className="title">{donor["agent"]["agent_id_type"]} Number:</span>
+                                <span className="answer">{donor["agent"]["agent_aadhar_number"]}</span>
                             </div>
                             <div>
-                                <span className="title">Anonymous:</span>
-                                <span className="answer">{donor["donor"]["donor_anonymous"] ? "Yes" : "No"}</span>
+                                <span className="title">Active:</span>
+                                <span className="answer">{donor["agent"]["agent_active"] ? "Yes" : "No"}</span>
                             </div>
                             <Link to="/donate_product">
                                 <p className="button" style={{ 'width': '20%', "border": "0px" }} >

@@ -41,22 +41,16 @@ const AgentSignup = () => {
       agent_active
     }
 
-    await axios.post(`${process.env.REACT_APP_BASE_URL}/agent/register`, data, {
+    await fetch(`${process.env.REACT_APP_BASE_URL}/agent/register`, {
+      method: "POST",
+      body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
-      },
-    }
-    )
-      .then(res => {
-        if (res.data.token) {
-          setLoading(0);
-          localStorage.setItem("token", res.data.token)
-          setError(0);
-        }
-        else {
-          setLoading(0);
-          setError(1);
-        }
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+          setLoading(0)
       });
   }
   return (
@@ -158,7 +152,7 @@ const AgentSignup = () => {
               onChange={(e) => {
                 if (agent_active == 0) setActive(1);
               }} className="radio"
-              disabled />
+              />
             No
             <input
               type="radio"
@@ -167,7 +161,6 @@ const AgentSignup = () => {
               onChange={(e) => {
                 if (agent_active == 1) setActive(0);
               }} className="radio"
-              checked
             />
 
           </div>

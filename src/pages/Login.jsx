@@ -32,6 +32,7 @@ const Login = () => {
         if (json.token) {
           setLoading(0);
           localStorage.setItem("token", json.token)
+          localStorage.setItem("role", json.role)
           console.log(json.token)
           setSuccess(1)
           navigate("/profile");

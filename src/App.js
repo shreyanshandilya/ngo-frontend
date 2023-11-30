@@ -10,6 +10,7 @@ import Intermediate from './pages/Intermediate';
 import AgentIntermediate from './pages/Agent/AgentIntermediate';
 import AgentSignup from './pages/Agent/AgentSignup';
 import AgentLogin from './pages/Agent/AgentLogin';
+import AgentProfile from './pages/Agent/AgentProfile';
 import View from './pages/Show';
 import Profile from './pages/Profile';
 import DonationPage from './pages/DonationPage';
@@ -56,6 +57,10 @@ function App() {
             <Route
               path="/agent/login"
               element={<AgentLogin />}
+            />
+            <Route
+              path="/agent/profile"
+              element={<AgentProfile />}
             />
             <Route
               path="/view"
