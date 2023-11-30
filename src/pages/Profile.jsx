@@ -80,11 +80,11 @@ function Profile() {
                                 <span className="answer">{donor["donor"]["donor_anonymous"] ? "Yes" : "No"}</span>
                             </div>
                             <Link to="/donate_product">
-                                <p className="button" style={{ 'width': '20%', "border": "0px" }} >
+                                <p className="button" style={{ 'width': 'fit-content', "border": "0px" }} >
                                     Donate
                                 </p>
                             </Link>
-                            <p className="button" style={{ 'width': '20%', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
+                            <p className="button" style={{ 'width': 'fit-content', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
                                 Logout
                             </p>
                         </div>
