@@ -11,6 +11,7 @@ const DonationPage = () => {
     const [product_area_of_donation, setArea] = useState('');
     const [loading, setLoading] = useState(false);
     const [Error, setError] = useState(false);
+    const [Image, setImage] = useState({})
 
     const [donor, setDonor] = useState({});
     const token = localStorage.getItem("token")
@@ -31,7 +32,7 @@ const DonationPage = () => {
         setLoading(1);
         let data = {
             product_title, product_category, product_description_before, product_defects_before, product_area_of_donation,
-            donor_mob_number: donor["donor"]["donor_mob_number"]
+            donor_mob_number: donor["donor"]["donor_mob_number"], Image
         }
         await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
             method: "POST",
@@ -45,6 +46,13 @@ const DonationPage = () => {
                 console.log(json)
             });
     }
+
+    const handleImageChange = (e) => {
+        let image = e.target.files[0];
+        const formdata = new FormData();
+        formdata.append('image', image);
+        setImage(formdata);
+    }   
 
     return (
         <div className="conts">
@@ -95,6 +103,13 @@ const DonationPage = () => {
                             name="product_area_of_donation"
                             value={product_area_of_donation}
                             onChange={e => setArea(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_input">
+                        <label htmlFor="product_image">Image </label>
+                        <input
+                        type="file"
+                        onChange = {handleImageChange}   
                         />
                     </div>
                     <button type="submit" onClick={handleSubmit}>
