@@ -19,22 +19,6 @@
     overflow: hidden;
 }
 
-.donorInfo {
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
-    text-align: left;
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    padding: 0.5em;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 1%;
-    background-color: #f8f9facc;
-    overflow: hidden;
-}
-
 .SliderDiv {
     flex: 0 0 40%;
     width: 40%;
@@ -77,7 +61,7 @@ button:hover {
         text-align: center;
     }
     .SliderDiv {
-        width: 90%;
+        width: 99%;
         height: fit-content;
         border-radius: 8px;
         background-color: rgb(220, 216, 216, 0.5);
