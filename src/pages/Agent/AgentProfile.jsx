@@ -31,7 +31,7 @@ function Profile() {
     const products = [];
     useEffect(() => {
         setLoading(true)
-        if(AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role")!="agent") {
+        if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") != "agent") {
             navigate('/');
         }
         fetch('https://ngo-api.onrender.com/agent/view', {
@@ -83,11 +83,11 @@ function Profile() {
                                 <span className="answer">{donor["agent"]["agent_active"] ? "Yes" : "No"}</span>
                             </div>
                             <Link to="/donate_product">
-                                <p className="button" style={{ 'width': '20%', "border": "0px" }} >
-                                    Donate
+                                <p className="button" style={{ 'width': 'fit-content', "border": "0px" }} >
+                                    Products
                                 </p>
                             </Link>
-                            <p className="button" style={{ 'width': '20%', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
+                            <p className="button" style={{ 'width': 'fit-content', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
                                 Logout
                             </p>
                         </div>

@@ -53,7 +53,7 @@ const Signup = () => {
   return (
     <div className="conts">
       <form className="form">
-        <h1>Register as a Donor</h1>
+        <h1><strong>Register as a Donor</strong></h1>
         <div className="form_input">
           <label htmlFor="donor_name">Donor Name</label>
           <input
