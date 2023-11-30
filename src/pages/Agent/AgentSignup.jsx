@@ -157,7 +157,8 @@ const AgentSignup = () => {
               name="active"
               onChange={(e) => {
                 if (agent_active == 0) setActive(1);
-              }} className="radio" />
+              }} className="radio"
+              disabled />
             No
             <input
               type="radio"
@@ -165,10 +166,14 @@ const AgentSignup = () => {
               name="active"
               onChange={(e) => {
                 if (agent_active == 1) setActive(0);
-              }} className="radio" />
+              }} className="radio"
+              checked
+            />
+
           </div>
         </div>
-
+        <label><strong>You will be made active upon Verification</strong></label>
+        <br />
         <button type="submit" onClick={handleSubmit}>
           Submit
         </button>

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import { useParams } from "react-router-dom";
-import NavbarLogged from "../components/NavbarLogged";
-import Navbar from "../components/NavbarLogged";
+import './Show1.css'
 
 const divStyle = {
     display: 'flex',
@@ -29,42 +28,43 @@ function Individual() {
     }, []);
     return (
         <>
-            <NavbarLogged />
             {loading ? <h1>Loading</h1> : <></>}
             {item["_id"] ?
-                <div style={{ "padding": "5%", "backgroundColor": "lightgray" }}>
-                    <div style={{ "borderTop": "1px solid black", "borderBottom": "1px solid black", "margin": "2% 0", "textAlign": "left", "padding": "2%", "backgroundColor": "white" }}>
-                        <p style={{ "fontSize": "150%" }}><strong>{item["product_title"]}</strong></p>
-                        <p style={{ "fontSize": "120%" }}><strong>Category</strong> {item.product_category}</p>
-                        <Slide>
-                            {item.product_pictures_before.map((slideImage, index) => (
-                                <div key={index}>
-                                    <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                <>
+                    <div className='oneProduct'>
+                        <div className="SliderDivOne">
+                            <Slide>
+                                {item.product_pictures_before.map((slideImage, index) => (
+                                    <div key={index}>
+                                        <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </Slide>
-                        <p><strong>Description </strong><br></br>{item.product_description_before}</p>
-                        <p><strong>Defects </strong>{item.product_defects_before}</p>
-                        <p><strong>Area of Donation </strong> {item.product_area_of_donation}</p>
-                        <p><strong>Collection Status </strong> {item.product_collection_status == false ? "False" : "True"}</p>
-                        <p><strong>Reimbursement Status </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
-                        <p><strong>Repair Status </strong> {item.product_repair_status == false ? "False" : "True"}</p>
-                        <p><strong>Repair Amount </strong> {item.product_repair_amount}</p>
-                        <p><strong>Received </strong> {item.product_received == false ? "False" : "True"}</p>
+                                ))}
+                            </Slide>
+                        </div>
+                        <div className="productDetailsDiv">
+                            <p style={{ "fontSize": "250%" }}><strong>{item["product_title"]}</strong></p>
+                            <p style={{ "fontSize": "180%" }}><strong>{item.product_category}</strong></p>
+                            <br />
+                            <p><strong>Description </strong><br></br>{item.product_description_before}</p>
+                            <p><strong>Defects  </strong>{item.product_defects_before}</p>
+                            <p><strong>Area of Donation  </strong> {item.product_area_of_donation}</p>
+                            <p><strong>Collection Status  </strong> {item.product_collection_status == false ? "Not Collected" : "Collected"}</p>
+                            <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
+                            <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
+                        </div>
+
                     </div>
-                    <div style={{ "borderTop": "1px solid black", "borderBottom": "1px solid black", "margin": "2% 0", "textAlign": "left", "padding": "2%", "backgroundColor": "white" }}>
-                        <p style={{ "fontSize": "150%" }}><strong>DONOR DETAILS</strong></p>
-                        <p><strong>Name</strong></p>
-                        <p>{item.product_donor.donor_name}</p>
-                        <p><strong>Mobile Number</strong></p>
-                        <p>{item.product_donor.donor_mob_number}</p>
-                        <p><strong>Address</strong></p>
-                        <p>{item.product_donor.donor_address}</p>
-                        <p><strong>Email</strong></p>
-                        <p>{item.product_donor.donor_email}</p>
+                    <div className="donorInfo">
+                        <p style={{ "fontSize": "200%" }}><strong>Donor Details</strong></p>
+                        <p><strong>Name:  </strong>{item.product_donor.donor_name}</p>
+                        <p><strong>Mobile Number:  </strong>{item.product_donor.donor_mob_number}</p>
+                        <p><strong>Address:  </strong>{item.product_donor.donor_address}</p>
+                        <p><strong>Email:  </strong>{item.product_donor.donor_email}</p>
                     </div>
-                </div> : <></>}
+
+
+                </> : <></>}
         </>
     )
 }

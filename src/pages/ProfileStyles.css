@@ -5,6 +5,7 @@
     border-radius: 8px;
     width: 70%;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 img {
@@ -44,6 +45,18 @@ img {
     margin: 4px 20px 4px 4px;
 }
 
+.strip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 8px;
+}
+
 .product {
     display: flex;
     flex-direction: row;
@@ -56,11 +69,6 @@ img {
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-.strip {
-    display: flex;
-    align-items: center;
 }
 
 .description {
@@ -88,13 +96,14 @@ img {
     }
     .strip {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0%;
     }
     .donate-button {
         position: relative;
         margin: 0 0 0 20%;
     }
-
     .product {
         display: flex;
         flex-direction: column;

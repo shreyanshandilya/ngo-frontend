@@ -1,0 +1,22 @@
+.oneProduct {
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    text-align: left;
+    align-items: center;
+    width: 80%;
+    padding: 0.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    background-color: #f8f9facc;
+    overflow: hidden;
+}
+
+.SliderDivOne {
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-radius: 8px;
+    background-color: rgb(220, 216, 216, 0.5);
+}

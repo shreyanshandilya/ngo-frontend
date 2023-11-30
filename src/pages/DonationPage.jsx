@@ -17,21 +17,21 @@ const DonationPage = () => {
     useEffect(() => {
         setLoading(true)
         fetch('https://ngo-api.onrender.com/donor/view', {
-            headers : {"Authorization" : `Bearer ${token}`}
+            headers: { "Authorization": `Bearer ${token}` }
         })
             .then(response => response.json())
             .then(data => {
                 setDonor(data)
                 setLoading(false)
             });
-    },[]);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(1);
         let data = {
-            product_title, product_category, product_description_before, product_defects_before, product_area_of_donation, 
-            donor_mob_number : donor["donor"]["donor_mob_number"]
+            product_title, product_category, product_description_before, product_defects_before, product_area_of_donation,
+            donor_mob_number: donor["donor"]["donor_mob_number"]
         }
         await fetch(`${process.env.REACT_APP_BASE_URL}/product`, {
             method: "POST",
@@ -47,39 +47,66 @@ const DonationPage = () => {
     }
 
     return (
-        <>
-        <Navbar/>
-        <div className="signup">
-            { !donor["donor"] ? <>Loading</> : <></>}
-            { donor["donor"] ? <>
-            <form>
-                <h1>Enter Product Details</h1>
-                <label>Title</label>
-                <input value={product_title} onChange={e => setTitle(e.target.value)}></input>
-                <br></br>
-                <label>Category</label>
-                <input value={product_category} onChange={e => setCategory(e.target.value)}></input>
-                <br></br>
-                <label>Description</label>
-                <input value={product_description_before} onChange={e => setDescription(e.target.value)}></input>
-                <br></br>
-                <label>Defects</label>
-                <input value={product_defects_before} onChange={e => setDefects(e.target.value)}></input>
-                <br></br>
-                <label>Area of Donation</label>
-                <input value={product_area_of_donation} onChange={e => setArea(e.target.value)}></input>
-                <br></br>
-                <br></br>
-                <button type="submit" onClick={handleSubmit}>
-                    Submit
-                </button>
-                {loading ? <div>Donation Succesful</div> : <></>}
-                {Error ? <div>Some error occured</div> : <></>}
-                <br></br>
-            </form>
-            </> : <></>}
+        <div className="conts">
+            {!donor["donor"] ? <>Loading</> : <></>}
+            {donor["donor"] ?
+                <form className="form">
+                    <h1>Enter Product Details</h1>
+                    <div className="form_input">
+                        <label htmlFor="product_title">Title</label>
+                        <input
+                            id="product_title"
+                            name="product_title"
+                            value={product_title}
+                            onChange={e => setTitle(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_input">
+                        <label htmlFor="product_category">Category</label>
+                        <input
+                            id="product_category"
+                            name="product_category"
+                            value={product_category}
+                            onChange={e => setCategory(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_input">
+                        <label htmlFor="product_description_before">Description</label>
+                        <textarea
+                            id="product_description_before"
+                            name="product_description_before"
+                            value={product_description_before}
+                            onChange={e => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_input">
+                        <label htmlFor="product_defects_before">Defects</label>
+                        <textarea
+                            id='product_defects_before'
+                            name="product_defects_before"
+                            value={product_defects_before}
+                            onChange={e => setDefects(e.target.value)}
+                        />
+                    </div>
+                    <div className="form_input">
+                        <label htmlFor="product_area_of_donation">Area of Donation</label>
+                        <input
+                            id="product_area_of_donation"
+                            name="product_area_of_donation"
+                            value={product_area_of_donation}
+                            onChange={e => setArea(e.target.value)}
+                        />
+                    </div>
+                    <button type="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                    {loading ? <div>Donation Succesful</div> : <></>}
+                    {Error ? <div>Some error occured</div> : <></>}
+                    <br></br>
+                </form>
+                : <></>}
         </div>
-        </>
+
     )
 }
 

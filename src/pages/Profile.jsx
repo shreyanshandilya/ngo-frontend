@@ -3,16 +3,17 @@ import './ProfileStyles.css';
 import 'react-slideshow-image/dist/styles.css';
 import { Link } from "react-router-dom";
 import prod from '../images/prod.jpg'
+import { useNavigate } from "react-router-dom";
+
 
 function Card(item) {
     const url = `/view/${item["_id"]}`
     return (
-        <div>
+        <div className="strip">
             <Link className="product" to={url} style={{ 'text-decoration': 'none', 'color': 'black' }}>
                 <p style={{ 'margin': '0' }}><strong>{item["product_title"]}</strong></p>
                 <p className="description" >{item.product_description_before} </p>
             </Link>
-            <br />
         </div>
     )
 }
@@ -22,6 +23,11 @@ function Profile() {
     const [donor, setDonor] = useState({});
     const token = localStorage.getItem("token");
     let o = []
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("token")
+        navigate("/");
+    }
     const products = [];
     useEffect(() => {
         setLoading(true)
@@ -74,17 +80,17 @@ function Profile() {
                                 <span className="answer">{donor["donor"]["donor_anonymous"] ? "Yes" : "No"}</span>
                             </div>
                             <Link to="/donate_product">
-                                <p className="button" style={{ 'width': '20%' }} >
+                                <p className="button" style={{ 'width': '20%', "border": "0px" }} >
                                     Donate
                                 </p>
                             </Link>
+                            <p className="button" style={{ 'width': '20%', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
+                                Logout
+                            </p>
                         </div>
                     </div>
                     <div className="profile-level-up" style={{ 'flex-direction': 'column' }}>
-                        <div className="strip">
-                            <h2>Your Donations</h2>
-                        </div>
-                        <br />
+                        <h2>Your Donations</h2>
                         <div className="product-list" style={{ "width": "80%" }}>
                             {products}
                         </div>
