@@ -24,7 +24,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="pages1">
+        <div className="pages">
           {/* <div>
             <button onClick={handleClick}>Log out</button>
           </div> */}
