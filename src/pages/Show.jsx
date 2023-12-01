@@ -14,7 +14,7 @@ const divStyle = {
 }
 
 
-function Card(item) {
+export function Card(item) {
     const route = `/view/${item["_id"]}`
 
     function handleProductView() {

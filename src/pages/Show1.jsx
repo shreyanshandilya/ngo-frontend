@@ -159,6 +159,7 @@ function Individual() {
                 setLoading(false)
                 setItem(data);
             });
+        
     }, []);
     return (
         <>
