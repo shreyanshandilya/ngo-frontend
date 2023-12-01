@@ -3,6 +3,7 @@ import { Slide } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 import { Link } from "react-router-dom";
 import './Show.css'
+import Navbar from '../components/NavbarLogged';
 
 const divStyle = {
     display: 'flex',
@@ -39,8 +40,8 @@ export function Card(item) {
                     <p style={{ "fontSize": "150%" }}><strong>{item["product_title"]}</strong></p>
                     <p style={{ "fontSize": "120%" }}><strong>{item.product_category}</strong></p>
                     <br />
-                    <p><strong>Description </strong><br />{item.product_description_before}</p>
-                    <p><strong>Defects<br /> </strong>{item.product_defects_before}</p>
+                    <p><strong>Description </strong><br />{item.product_repair_status ? item.product_description_after : item.product_description_before}</p>
+                    <p><strong>Defects<br /> </strong>{item.product_repair_status ? item.product_defects_after : item.product_defects_before}</p>
                     <p><strong>Area of Donation </strong> {item.product_area_of_donation}</p>
 
                     <Link className="button" to={route} style={{ "textDecoration": "none", 'width': 'fit-content' }}><strong>View</strong></Link>
@@ -78,6 +79,7 @@ function App() {
     }, []);
     return (
         <>
+            <Navbar />
             {loading ? <h1><strong>Loading</strong></h1> : <></>}
             <div style={{ "backgroundColor": "none" }}>
                 {list}

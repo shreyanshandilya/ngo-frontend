@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import prod from '../images/prod.jpg'
 import { useNavigate } from "react-router-dom";
 import { AuthVerify } from "../helper/JWTVerify";
+import Navbar from '../components/NavbarLogged';
 
 function Card(item) {
     const url = `/view/${item["_id"]}`
@@ -31,7 +32,7 @@ function Profile() {
     const products = [];
     useEffect(() => {
         setLoading(true)
-        if(AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role")!="donor") {
+        if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") != "donor") {
             navigate("/");
         }
         fetch('https://ngo-api.onrender.com/donor/view', {
@@ -46,6 +47,7 @@ function Profile() {
     if (donor["donor"]) donor["donor"]["donor_products"].map(product => products.push(Card(product)))
     return (
         <>
+            <Navbar />
             {!donor["donor"] ? <h1>Loading</h1> : <></>}
             {donor["donor"] ?
                 <>

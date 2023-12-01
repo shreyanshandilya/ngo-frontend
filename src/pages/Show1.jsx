@@ -4,6 +4,7 @@ import 'react-slideshow-image/dist/styles.css'
 import { useParams } from "react-router-dom";
 import './Show1.css'
 import { AuthVerify } from "../helper/JWTVerify";
+import Navbar from '../components/NavbarLogged';
 
 const divStyle = {
     display: 'flex',
@@ -159,10 +160,11 @@ function Individual() {
                 setLoading(false)
                 setItem(data);
             });
-        
+
     }, []);
     return (
         <>
+            <Navbar />
             {loading ? <h1>Loading</h1> : <></>}
             {item["_id"] ?
                 <>
@@ -181,8 +183,8 @@ function Individual() {
                             <p style={{ "fontSize": "250%" }}><strong>{item["product_title"]}</strong></p>
                             <p style={{ "fontSize": "180%" }}><strong>{item.product_category}</strong></p>
                             <br />
-                            <p><strong>Description </strong><br></br>{item.product_description_before}</p>
-                            <p><strong>Defects  </strong>{item.product_defects_before}</p>
+                            <p><strong>Description </strong><br></br>{item.product_repair_status ? item.product_description_after : item.product_description_before}</p>
+                            <p><strong>Defects  </strong>{item.product_repair_status ? item.product_defects_after : item.product_defects_before}</p>
                             <p><strong>Area of Donation  </strong> {item.product_area_of_donation}</p>
                             <p><strong>Collection Status  </strong> {item.product_collection_status == false ? "Not Collected" : "Collected"}</p>
                             <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>

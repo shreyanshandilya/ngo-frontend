@@ -13,6 +13,7 @@ function Landing() {
     return (
         <>
             <Navbar />
+
             <div className="landingpage">
                 <div className="content-row" style={{ 'margin-top': '5vh' }}>
                     <img className='round-img' src={don}></img>
@@ -22,12 +23,21 @@ function Landing() {
                         <h2><strong>When giving doubles up as saving the environment</strong></h2>
                         <p>With each donation, you not just help someone in need, but also contribute towards saving the planet. Let’s work together towards a greener future.</p>
                         <div className='button-con'>
-                            <div
-                                className="donate"
-                                onClick={() => navigate("/donate")}
-                            >
-                                Donate Now
-                            </div>
+                            {localStorage.role == 'donor' ?
+                                <div
+                                    className="donate"
+                                    onClick={() => navigate("/donate_product")}
+                                >
+                                    Donate Now
+                                </div>
+                                :
+                                <div
+                                    className="donate"
+                                    onClick={() => navigate("/donate")}
+                                >
+                                    Donate Now
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useSignupAgent } from "../../hooks/useSignupAgent"
 import '../Signup.css'
 import axios from "axios"
+import Navbar from '../../components/NavbarLogged'
 
 const AgentSignup = () => {
 
@@ -50,13 +51,14 @@ const AgentSignup = () => {
     })
       .then(response => response.json())
       .then(json => {
-          setLoading(0)
+        setLoading(0)
       });
   }
-  return (
+  return (<>
+    <Navbar />
     <div className="conts">
       <form className="form">
-        <h1>Agent Registration</h1>
+        <h1><strong>Agent Registration</strong></h1>
         <div className="form_input">
           <label htmlFor="agent_name">Agent Name</label>
           <input
@@ -152,7 +154,7 @@ const AgentSignup = () => {
               onChange={(e) => {
                 if (agent_active == 0) setActive(1);
               }} className="radio"
-              />
+              disabled />
             No
             <input
               type="radio"
@@ -161,7 +163,7 @@ const AgentSignup = () => {
               onChange={(e) => {
                 if (agent_active == 1) setActive(0);
               }} className="radio"
-            />
+              selected />
 
           </div>
         </div>
@@ -175,6 +177,7 @@ const AgentSignup = () => {
         {Error ? <div>Looks like the given account is already signed up</div> : <></>}
       </form>
     </div>
+  </>
   )
 }
 

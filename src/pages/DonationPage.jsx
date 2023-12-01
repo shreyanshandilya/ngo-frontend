@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import './Signup.css'
-import Navbar from '../components/Navbar';
+import Navbar from '../components/NavbarLogged';
 
 const DonationPage = () => {
 
@@ -62,7 +62,8 @@ const DonationPage = () => {
         setImage(img)
     }
 
-    return (
+    return (<>
+        <Navbar />
         <div className="conts">
             {!donor["donor"] ? <>Loading</> : <></>}
             {donor["donor"] ?
@@ -129,7 +130,7 @@ const DonationPage = () => {
                 </form>
                 : <></>}
         </div>
-
+    </>
     )
 }
 

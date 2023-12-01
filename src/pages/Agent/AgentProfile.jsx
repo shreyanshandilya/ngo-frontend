@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import prod from '../../images/prod.jpg'
 import { useNavigate } from "react-router-dom";
 import { AuthVerify } from "../../helper/JWTVerify";
+import Navbar from '../../components/NavbarLogged'
 
 function Card(item) {
     const url = `/view/${item["_id"]}`
@@ -54,8 +55,8 @@ function Profile() {
             .then(data => {
                 setLoading(false)
                 for (let i = 0; i < data.length; i++) {
-                    if(data[i]["product_agent"]==donor["agent"]["_id"]) {
-                        let a = products 
+                    if (data[i]["product_agent"] == donor["agent"]["_id"]) {
+                        let a = products
                         a.push(Card(data[i]))
                         setProducts(a)
                     }
@@ -65,6 +66,7 @@ function Profile() {
     }
     return (
         <>
+            <Navbar />
             {!donor["agent"] ? <h1>Loading</h1> : <></>}
             {donor["agent"] ?
                 <>
@@ -101,7 +103,7 @@ function Profile() {
                                 <span className="title">Active:</span>
                                 <span className="answer">{donor["agent"]["agent_active"] ? "Yes" : "No"}</span>
                             </div>
-                            <Link to="/donate_product">
+                            <Link to="/view">
                                 <p className="button" style={{ 'width': 'fit-content', "border": "0px" }} >
                                     Products
                                 </p>
@@ -112,7 +114,7 @@ function Profile() {
                         </div>
                     </div>
                     <div className="profile-level-up" style={{ 'flex-direction': 'column' }}>
-                        <h2>Your Donations</h2>
+                        <h2><strong>Your Products</strong></h2>
                         {loading1 ? <p>Loading..</p> : <></>}
                         <button onClick={view}>VIEW</button>
                         <div className="product-list" style={{ "width": "80%" }}>

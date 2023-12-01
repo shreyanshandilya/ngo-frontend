@@ -3,6 +3,7 @@ import { useLogin } from "../../hooks/useLogin"
 import axios from "axios"
 import '../Login'
 import { useNavigate } from "react-router-dom";
+import Navbar from '../../components/NavbarLogged'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,10 +44,11 @@ const Login = () => {
       });
   }
 
-  return (
+  return (<>
+    <Navbar />
     <div className="container">
       <form className="login" onSubmit={handleSubmit}>
-        <h2>Log In as Agent</h2>
+        <h2><strong>Log In as Agent</strong></h2>
         <div className="form_input">
           <label htmlFor="username">Username :</label>
           <input
@@ -73,6 +75,7 @@ const Login = () => {
         {Success ? <div>Success</div> : <></>}
       </form>
     </div>
+  </>
   )
 }
 
