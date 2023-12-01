@@ -188,7 +188,7 @@ function Individual() {
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
                         </div>
                     </div>
-                    {(agent != "0") ?
+                    {agent!="0" ?
                         <>
                             {item.product_agent ?
                                 (item.product_agent["_id"] === agent ?
@@ -248,15 +248,17 @@ function Individual() {
                                     : <></>)
                                 :
                                 <>
-                                    <button onClick={claim}>CLAIM</button>
+                                <button onClick={claim}>CLAIM</button>
                                     {error ? <p>ERROR! Please try again</p> : <></>}
                                     {success ? <p>Successfully Claimed!</p> : <></>}
                                     {loading1 ? <p>Processing Request....</p> : <></>}
                                 </>}
                         </>
-                        : <></>
+                        : <>
+                           </>  
+                        
                     }
-                    {item.product_repair_status && !item.product_received ?
+                    {item.product_repair_status && !item.product_received && item.product_agent && item.product_agent["_id"] === agent?
                         <>
                             <button onClick={handover}>
                                 HANDOVER
