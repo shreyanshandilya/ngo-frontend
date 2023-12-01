@@ -47,19 +47,27 @@ const DonationPage = () => {
             });
     }
 
+    // const handleImageChange = (e) => {
+    //     let image = e.target.files[0];
+    //     const formdata = new FormData();
+    //     formdata.append('image', image);
+    //     setImage(formdata);
+    // }
+
     const handleImageChange = (e) => {
-        let image = e.target.files[0];
-        const formdata = new FormData();
-        formdata.append('image', image);
-        setImage(formdata);
-    }   
+        const img = {
+            preview: URL.createObjectURL(e.target.files[0]),
+            data: e.target.files[0],
+        }
+        setImage(img)
+    }
 
     return (
         <div className="conts">
             {!donor["donor"] ? <>Loading</> : <></>}
             {donor["donor"] ?
                 <form className="form">
-                    <h1>Enter Product Details</h1>
+                    <h1><strong>Enter Product Details</strong></h1>
                     <div className="form_input">
                         <label htmlFor="product_title">Title</label>
                         <input
@@ -108,8 +116,8 @@ const DonationPage = () => {
                     <div className="form_input">
                         <label htmlFor="product_image">Image </label>
                         <input
-                        type="file"
-                        onChange = {handleImageChange}   
+                            type="file"
+                            onChange={handleImageChange}
                         />
                     </div>
                     <button type="submit" onClick={handleSubmit}>

@@ -186,100 +186,101 @@ function Individual() {
                             <p><strong>Collection Status  </strong> {item.product_collection_status == false ? "Not Collected" : "Collected"}</p>
                             <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
+
+
+                            {(agent != "0") ?
+                                <>
+                                    {item.product_agent ?
+                                        (item.product_agent["_id"] === agent ?
+                                            <>
+                                                {!item.product_collection_status ? <>
+                                                    <button onClick={collect}>COLLECT</button>
+                                                    {error ? <p>ERROR! Please try again</p> : <></>}
+                                                    {success ? <p>Successfully Collected!</p> : <></>}
+                                                    {loading1 ? <p>Processing Request....</p> : <></>}
+                                                </> : (
+                                                    <>
+                                                        {!item.product_repair_status ?
+                                                            <>
+                                                                <button onClick={repair}>REPAIR</button>
+                                                                {repairModal ? <>
+                                                                    <form>
+                                                                        <div className="form_input">
+                                                                            <label htmlFor="description">Description:</label>
+                                                                            <input
+                                                                                type="text"
+                                                                                id="description"
+                                                                                name="description"
+                                                                                value={description}
+                                                                                onChange={(e) => setDescription(e.target.value)}
+                                                                            />
+                                                                        </div>
+                                                                        <div className="form_input">
+                                                                            <label htmlFor="defects">Defects:</label>
+                                                                            <input
+                                                                                id="defects"
+                                                                                name="defects"
+                                                                                value={info}
+                                                                                onChange={(e) => setDefects(e.target.value)}
+                                                                            />
+                                                                        </div>
+                                                                        <div className="form_input">
+                                                                            <label htmlFor="price">Price:</label>
+                                                                            <input
+                                                                                type="text"
+                                                                                id="price"
+                                                                                name="price"
+                                                                                value={price}
+                                                                                onChange={(e) => setPrice(e.target.value)}
+                                                                            />
+                                                                        </div>
+                                                                        <button onClick={repairSubmit}>SUBMIT</button>
+                                                                        {error ? <p>ERROR! Please try again</p> : <></>}
+                                                                        {success ? <p>Successfully Submitted!</p> : <></>}
+                                                                        {loading1 ? <p>Processing Request....</p> : <></>}
+                                                                    </form>
+                                                                </> : <></>}
+                                                            </>
+                                                            : <></>}
+                                                    </>
+                                                )
+                                                }</>
+                                            : <></>)
+                                        :
+                                        <>
+                                            <button onClick={claim}>CLAIM</button>
+                                            {error ? <p>ERROR! Please try again</p> : <></>}
+                                            {success ? <p>Successfully Claimed!</p> : <></>}
+                                            {loading1 ? <p>Processing Request....</p> : <></>}
+                                        </>}
+                                </>
+                                : <></>
+                            }
+
+                            {item.product_repair_status && !item.product_received ?
+                                <>
+                                    <button onClick={handover}>
+                                        HANDOVER
+                                    </button>
+                                    {error ? <p>ERROR! Please try again</p> : <></>}
+                                    {success ? <p>Successfully Donated!</p> : <></>}
+                                    {loading1 ? <p>Processing Request....</p> : <></>}
+                                </> :
+
+                                <></>
+                            }
+
+                            {item.product_received ?
+                                <>
+                                    <button>
+                                        DONATED
+                                    </button>
+                                </> :
+
+                                <></>
+                            }
                         </div>
                     </div>
-                    {agent!="0" ?
-                        <>
-                            {item.product_agent ?
-                                (item.product_agent["_id"] === agent ?
-                                    <>
-                                        {!item.product_collection_status ? <>
-                                            <button onClick={collect}>COLLECT</button>
-                                            {error ? <p>ERROR! Please try again</p> : <></>}
-                                            {success ? <p>Successfully Collected!</p> : <></>}
-                                            {loading1 ? <p>Processing Request....</p> : <></>}
-                                        </> : (
-                                            <>
-                                                {!item.product_repair_status ?
-                                                    <>
-                                                        <button onClick={repair}>REPAIR</button>
-                                                        {repairModal ? <>
-                                                            <form>
-                                                                <div className="form_input">
-                                                                    <label htmlFor="description">Description:</label>
-                                                                    <input
-                                                                        type="text"
-                                                                        id="description"
-                                                                        name="description"
-                                                                        value={description}
-                                                                        onChange={(e) => setDescription(e.target.value)}
-                                                                    />
-                                                                </div>
-                                                                <div className="form_input">
-                                                                    <label htmlFor="defects">Defects:</label>
-                                                                    <input
-                                                                        id="defects"
-                                                                        name="defects"
-                                                                        value={info}
-                                                                        onChange={(e) => setDefects(e.target.value)}
-                                                                    />
-                                                                </div>
-                                                                <div className="form_input">
-                                                                    <label htmlFor="price">Price:</label>
-                                                                    <input
-                                                                        type="text"
-                                                                        id="price"
-                                                                        name="price"
-                                                                        value={price}
-                                                                        onChange={(e) => setPrice(e.target.value)}
-                                                                    />
-                                                                </div>
-                                                                <button onClick={repairSubmit}>SUBMIT</button>
-                                                                {error ? <p>ERROR! Please try again</p> : <></>}
-                                                                {success ? <p>Successfully Submitted!</p> : <></>}
-                                                                {loading1 ? <p>Processing Request....</p> : <></>}
-                                                            </form>
-                                                        </> : <></>}
-                                                    </>
-                                                    : <></>}
-                                            </>
-                                        )
-                                        }</>
-                                    : <></>)
-                                :
-                                <>
-                                <button onClick={claim}>CLAIM</button>
-                                    {error ? <p>ERROR! Please try again</p> : <></>}
-                                    {success ? <p>Successfully Claimed!</p> : <></>}
-                                    {loading1 ? <p>Processing Request....</p> : <></>}
-                                </>}
-                        </>
-                        : <>
-                           </>  
-                        
-                    }
-                    {item.product_repair_status && !item.product_received && item.product_agent && item.product_agent["_id"] === agent?
-                        <>
-                            <button onClick={handover}>
-                                HANDOVER
-                            </button>
-                            {error ? <p>ERROR! Please try again</p> : <></>}
-                            {success ? <p>Successfully Donated!</p> : <></>}
-                            {loading1 ? <p>Processing Request....</p> : <></>}
-                        </> :
-
-                        <></>
-                    }
-
-                    {item.product_received ?
-                        <>
-                            <button>
-                                DONATED
-                            </button>
-                        </> :
-
-                        <></>
-                    }
                     <div className="donorInfo">
                         <p style={{ "fontSize": "200%" }}><strong>Donor Details</strong></p>
                         <p><strong>Name:  </strong>{item.product_donor.donor_name}</p>

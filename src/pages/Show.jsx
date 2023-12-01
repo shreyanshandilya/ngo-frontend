@@ -78,7 +78,7 @@ function App() {
     }, []);
     return (
         <>
-            {loading ? <h1>Loading</h1> : <></>}
+            {loading ? <h1><strong>Loading</strong></h1> : <></>}
             <div style={{ "backgroundColor": "none" }}>
                 {list}
             </div>
