@@ -24,8 +24,10 @@ function Individual() {
     const [success, setSuccess] = useState(false);
     const [loading1, setLoading1] = useState(false);
     const [repairModal, setRepairModal] = useState(false);
+    const [otpModal, setOtpModal] = useState(false);
     const [info, setDefects] = useState('');
     const [description, setDescription] = useState('');
+    const [otpVal, setOtpVal] = useState('');
     const [price, setPrice] = useState('');
 
     const claim = () => {
@@ -55,11 +57,14 @@ function Individual() {
             });
     }
 
-    const collect = () => {
+    const collect = (e) => {
+        setError(0)
+        e.preventDefault();
         setLoading1(true)
         let data = {
             product_id: formId,
-            agent_id: agent
+            agent_id: agent,
+            product_otp: otpVal
         }
         fetch(`https://ngo-api.onrender.com/product/collect`, {
             method: "POST",
@@ -81,9 +86,14 @@ function Individual() {
             });
     }
 
+    const otp = () => {
+        setOtpModal(true)
+    }
+
     const repair = () => {
         setRepairModal(true)
     }
+
 
     const repairSubmit = (e) => {
         setError(0)
@@ -197,10 +207,27 @@ function Individual() {
                                         (item.product_agent["_id"] === agent ?
                                             <>
                                                 {!item.product_collection_status ? <>
-                                                    <button onClick={collect}>COLLECT</button>
-                                                    {error ? <p>ERROR! Please try again</p> : <></>}
-                                                    {success ? <p>Successfully Collected!</p> : <></>}
-                                                    {loading1 ? <p>Processing Request....</p> : <></>}
+                                                    <button onClick={otp}>COLLECT</button>
+                                                    {otpModal ? <>
+                                                        <form>
+                                                            <div className="form_input">
+                                                                <label htmlFor="otpval">Enter OTP:</label>
+                                                                <input
+                                                                    type="text"
+                                                                    id="otpval"
+                                                                    name="otp"
+                                                                    value={otpVal}
+                                                                    onChange={(e) => setOtpVal(e.target.value)}
+                                                                />
+                                                            </div>
+                                                            <button onClick={collect}>SUBMIT</button>
+                                                            {error ? <p>ERROR! Please try again</p> : <></>}
+                                                            {success ? <p>Successfully Collected!</p> : <></>}
+                                                            {loading1 ? <p>Processing Request....</p> : <></>}
+                                                        </form>
+                                                    </> : <></>
+
+                                                    }
                                                 </> : (
                                                     <>
                                                         {!item.product_repair_status ?
@@ -291,7 +318,8 @@ function Individual() {
                         <p><strong>Address:  </strong>{item.product_donor.donor_address}</p>
                         <p><strong>Email:  </strong>{item.product_donor.donor_email}</p>
                     </div>
-                </> : <></>}
+                </> : <></>
+            }
         </>
     )
 }
