@@ -19,6 +19,7 @@ const AgentSignup = () => {
   const { signup, error, isLoading } = useSignupAgent();
   const [loading, setLoading] = useState(false);
   const [Error, setError] = useState(false);
+  const [Success, setSuccess] = useState(false);
 
   const card = ["Aadhar Card", "Pan Card", "Driving License", "Passport"];
   let list = []
@@ -52,6 +53,7 @@ const AgentSignup = () => {
       .then(response => response.json())
       .then(json => {
         setLoading(0)
+        setSuccess(1)
       });
   }
   return (<>
@@ -173,6 +175,7 @@ const AgentSignup = () => {
           Submit
         </button>
 
+        {Success ? <div>Agent Signup success, admin verification pending</div> : <></>}
         {loading ? <div>Signing you up.. Please wait</div> : <></>}
         {Error ? <div>Looks like the given account is already signed up</div> : <></>}
       </form>

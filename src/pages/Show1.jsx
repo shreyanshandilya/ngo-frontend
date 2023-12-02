@@ -20,6 +20,7 @@ function Individual() {
     const [loading, setLoading] = useState(false);
     const [item, setItem] = useState({});
     const [agent, setAgent] = useState("0");
+    const [agentActive, setAgentActive] = useState(false);
     const [error, setError] = useState(false);
     const [success, setSuccess] = useState(false);
     const [loading1, setLoading1] = useState(false);
@@ -161,6 +162,7 @@ function Individual() {
                 .then(response => response.json())
                 .then(data => {
                     setAgent(data["agent"]["_id"])
+                    setAgentActive(data["agent"]["agent_active"])
                 });
         }
         setLoading(true)
@@ -201,7 +203,7 @@ function Individual() {
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
 
 
-                            {(agent != "0") ?
+                            {(agent != "0" && agentActive) ?
                                 <>
                                     {item.product_agent ?
                                         (item.product_agent["_id"] === agent ?
@@ -287,6 +289,7 @@ function Individual() {
                                 : <></>
                             }
 
+
                             {item.product_repair_status && !item.product_received ?
                                 <>
                                     <button onClick={handover}>
@@ -301,13 +304,16 @@ function Individual() {
                             }
 
                             {item.product_received ?
-                                <>
-                                    <button>
-                                        DONATED
-                                    </button>
-                                </> :
+                                <p style={{ 'color': 'green', }}><strong>
+                                    Prodcut Already Donated
+                                </strong></p> :
 
                                 <></>
+                            }
+                            {(agent != "0" && (!agentActive)) ?
+                                <div>
+                                    <p style={{ 'color': 'red' }}><strong>Agent Not Active</strong></p>
+                                </div> : <></>
                             }
                         </div>
                     </div>
