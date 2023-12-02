@@ -22,14 +22,15 @@ function Card(item) {
 function Profile() {
     const [loading, setLoading] = useState(false);
     const [donor, setDonor] = useState({});
+    const [visible, setVisible] = useState();
+    const [loading1, setLoading1] = useState(false);
     const token = localStorage.getItem("token");
-    let o = []
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("token")
         navigate("/");
     }
-    const products = [];
+    const [products, setProducts] = useState([])
     useEffect(() => {
         setLoading(true)
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") != "donor") {
@@ -44,7 +45,25 @@ function Profile() {
                 setLoading(false)
             });
     }, []);
-    if (donor["donor"]) donor["donor"]["donor_products"].map(product => products.push(Card(product)))
+
+    const view = () => {
+        setLoading(1)
+        setVisible(true)
+        fetch('https://ngo-api.onrender.com/product/')
+            .then(response => response.json())
+            .then(data => {
+                setLoading(false)
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i]["product_donor"] == donor["donor"]["_id"]) {
+                        let a = products
+                        a.push(Card(data[i]))
+                        setProducts(a)
+                    }
+                }
+            })
+        setLoading1(false)
+    }
+
     return (
         <>
             <Navbar />
@@ -95,9 +114,11 @@ function Profile() {
                         </div>
                     </div>
                     <div className="profile-level-up" style={{ 'flex-direction': 'column' }}>
-                        <h2>Your Donations</h2>
+                        <h2><strong>Your Donations</strong></h2>
+                        {loading1 ? <p>Loading..</p> : <></>}
+                        <button className="donate" style={{ 'padding': '0.5% 1% 0.5% 1%' }} onClick={view}>VIEW</button>
                         <div className="product-list" style={{ "width": "80%" }}>
-                            {products}
+                            {visible ? <>{products}</> : <></>}
                         </div>
                     </div>
 

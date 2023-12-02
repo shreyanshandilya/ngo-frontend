@@ -21,12 +21,10 @@ function Card(item) {
 
 function Profile() {
     const [loading, setLoading] = useState(false);
-    const [donor, setDonor] = useState({});
+    const [agent, setAgent] = useState({});
     const [visible, setVisible] = useState();
     const [loading1, setLoading1] = useState(false);
-    const agent = [];
     const token = localStorage.getItem("token");
-    let o = []
     const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("token")
@@ -43,7 +41,7 @@ function Profile() {
         })
             .then(response => response.json())
             .then(data => {
-                setDonor(data)
+                setAgent(data)
                 setLoading(false)
             });
     }, []);
@@ -55,7 +53,7 @@ function Profile() {
             .then(data => {
                 setLoading(false)
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i]["product_agent"] == donor["agent"]["_id"]) {
+                    if (data[i]["product_agent"] == agent["agent"]["_id"]) {
                         let a = products
                         a.push(Card(data[i]))
                         setProducts(a)
@@ -64,11 +62,12 @@ function Profile() {
             })
         setLoading1(false)
     }
+
     return (
         <>
             <Navbar />
-            {!donor["agent"] ? <h1>Loading</h1> : <></>}
-            {donor["agent"] ?
+            {!agent["agent"] ? <h1>Loading</h1> : <></>}
+            {agent["agent"] ?
                 <>
                     <div className='profile-level-up'>
                         <div className="profile" >
@@ -77,31 +76,31 @@ function Profile() {
                         <div className="personalDetails">
                             <div>
                                 <span className="title">Name:</span>
-                                <span className="answer">{donor["agent"]["agent_name"]}</span>
+                                <span className="answer">{agent["agent"]["agent_name"]}</span>
                             </div>
                             <div>
                                 <span className="title">Mobile Number:</span>
-                                <span className="answer">{donor["agent"]["agent_mob_number"]}</span>
+                                <span className="answer">{agent["agent"]["agent_mob_number"]}</span>
                             </div>
                             <div>
                                 <span className="title">Email:</span>
-                                <span className="answer">{donor["agent"]["agent_email"]}</span>
+                                <span className="answer">{agent["agent"]["agent_email"]}</span>
                             </div>
                             <div>
                                 <span className="title">Address:</span>
-                                <span className="answer">{donor["agent"]["agent_address"]}</span>
+                                <span className="answer">{agent["agent"]["agent_address"]}</span>
                             </div>
                             <div>
                                 <span className="title">ID Type:</span>
-                                <span className="answer">{donor["agent"]["agent_id_type"]}</span>
+                                <span className="answer">{agent["agent"]["agent_id_type"]}</span>
                             </div>
                             <div>
-                                <span className="title">{donor["agent"]["agent_id_type"]} Number:</span>
-                                <span className="answer">{donor["agent"]["agent_aadhar_number"]}</span>
+                                <span className="title">{agent["agent"]["agent_id_type"]} Number:</span>
+                                <span className="answer">{agent["agent"]["agent_aadhar_number"]}</span>
                             </div>
                             <div>
                                 <span className="title">Active:</span>
-                                <span className="answer">{donor["agent"]["agent_active"] ? "Yes" : "No"}</span>
+                                <span className="answer">{agent["agent"]["agent_active"] ? "Yes" : "No"}</span>
                             </div>
                             <Link to="/view">
                                 <p className="button" style={{ 'width': 'fit-content', "border": "0px" }} >

@@ -65,10 +65,10 @@ function Navbar() {
                 <MDBBtn className='button' style={{ 'width': 'fit-content' }} outline onClick={() => navigate("/donate")}>Donate</MDBBtn>
               </> : <></>}
               {localStorage.role == 'donor' ?
-                <MDBBtn className='button' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'border': 'none' }} outline onClick={() => navigate("/donate_product")}>Donate</MDBBtn>
+                <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'marginRight': '0%', 'border': 'none', 'color': 'white' }} outline onClick={() => navigate("/donate_product")}>Donate</MDBBtn>
                 : <></>}
               {(localStorage.role == 'donor' | localStorage.role == 'agent') ?
-                <MDBBtn className='button' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'backgroundColor': 'red', 'border': 'none' }} outline onClick={handleLogout}>Logout</MDBBtn>
+                <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'backgroundColor': 'red', 'border': 'none', 'color': 'white' }} outline onClick={handleLogout}>Logout</MDBBtn>
                 : <></>}
             </MDBInputGroup>
           </MDBCollapse>
