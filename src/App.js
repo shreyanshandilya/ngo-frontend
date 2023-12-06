@@ -15,6 +15,7 @@ import View from './pages/Show';
 import Profile from './pages/Profile';
 import DonationPage from './pages/DonationPage';
 import Show1 from './pages/Show1';
+import Admin from './components/Admin';
 
 function App() {
   const { logout } = useLogout()
@@ -77,6 +78,10 @@ function App() {
             <Route
               path="/view/:formId"
               element={<Show1 />}
+            />
+            <Route
+              path="/admin"
+              element={<Admin />}
             />
           </Routes>
         </div>
