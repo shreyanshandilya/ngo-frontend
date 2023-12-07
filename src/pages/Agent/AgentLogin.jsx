@@ -1,6 +1,4 @@
 import { useState } from "react"
-import { useLogin } from "../../hooks/useLogin"
-import axios from "axios"
 import '../Login'
 import { useNavigate } from "react-router-dom";
 import Navbar from '../../components/NavbarLogged'

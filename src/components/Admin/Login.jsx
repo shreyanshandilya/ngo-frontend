@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../NavbarLogged";
+import "./Login.css"
 
 function Login() {
 
@@ -23,7 +25,7 @@ function Login() {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.token && json.role=="admin") {
+                if (json.token && json.role == "admin") {
                     localStorage.setItem("token", json.token);
                     localStorage.setItem("role", json.role);
                     navigate("/admin/dashboard");
@@ -38,10 +40,22 @@ function Login() {
 
     return (
         <>
-            <label for="admin">ADMIN KEY</label>
-            <input type="password" value={key} onChange={(e) => setKey(e.target.value)} name="admin"></input>
-            <button onClick={Authenticate}>LOGIN</button>
-            {loading ? <h1>Authenticating....</h1> : <></>}
+            <Navbar />
+            <div className="container">
+                <form className="login" onSubmit={Authenticate}>
+                    <h2><strong>Admin Portal Login</strong></h2>
+                    <div className="form_input">
+                        <label for="admin">Admin Key</label>
+                        <input type="password"
+                            value={key}
+                            onChange={(e) => setKey(e.target.value)}
+                            name="admin"
+                        />
+                    </div>
+                    <button onClick={Authenticate}>LOGIN</button>
+                    {loading ? <div>Authenticating....</div> : <></>}
+                </form>
+            </div>
         </>
     )
 }

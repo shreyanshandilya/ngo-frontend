@@ -1,0 +1,93 @@
+.showPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.showColumn {
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fab5;
+    align-items: center;
+    width: 50%;
+}
+
+.productCardHolder {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    padding: 0.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    background-color: #f8f9fab5;
+    overflow: hidden;
+}
+.productCard {
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    text-align: left;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding: 0.5em;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 1%;
+    overflow: hidden;
+}
+
+.SliderDiv {
+    flex: 0 0 40%;
+    width: 40%;
+    border-radius: 8px;
+    background-color: rgb(220, 216, 216, 0.5);
+}
+
+.productDetailsDiv {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.button {
+    background-color: #2a9be7a2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    border: 1px solid #129bf6a2;
+}
+button:hover {
+    background-color: rgba(41, 127, 185, 0.69);
+}
+
+@media (max-width: 700px) {
+    .productCard {
+        flex-direction: column;
+        width: 92%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .productDetailsDiv {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .showPage {
+        display: flex;
+        flex-direction: column;
+    }
+    .showColumn {
+        width: 100%;
+    }
+}

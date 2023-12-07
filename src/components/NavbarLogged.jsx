@@ -16,9 +16,13 @@ import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const handleLogout = () => {
+    let navto = '/';
+    if (localStorage.role == 'admin') {
+      navto = '/admin/login'
+    }
     localStorage.removeItem("token")
     localStorage.removeItem("role")
-    navigate("/");
+    navigate(navto);
   }
 
   const [openNavNoTogglerThird, setOpenNavNoTogglerThird] = useState(false);
@@ -67,7 +71,7 @@ function Navbar() {
               {localStorage.role == 'donor' ?
                 <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'marginRight': '0%', 'border': 'none', 'color': 'white' }} outline onClick={() => navigate("/donate_product")}>Donate</MDBBtn>
                 : <></>}
-              {(localStorage.role == 'donor' | localStorage.role == 'agent') ?
+              {(localStorage.role == 'donor' | localStorage.role == 'agent' | localStorage.role == 'admin') ?
                 <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'backgroundColor': 'red', 'border': 'none', 'color': 'white' }} outline onClick={handleLogout}>Logout</MDBBtn>
                 : <></>}
             </MDBInputGroup>
