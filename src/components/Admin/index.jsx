@@ -58,7 +58,7 @@ function Page() {
     const [nanonDonorData, setnAnonDonorData] = useState([]);
 
     const view_agent = () => {
-        if(agentLoaded) return setAgentLoaded(false);
+        if (agentLoaded) return setAgentLoaded(false);
         setAgentLoaded(true);
         setLoadingAgent(true);
         let demo = [];
@@ -110,13 +110,13 @@ function Page() {
                 VIEW AGENT
             </button>
             {agentLoaded ? <>
-            {agentLoading ? <h1>Retrieving all agent details..</h1> :
-                <>
-                    {agentData}
-                </>
-            }
+                {agentLoading ? <h1>Retrieving all agent details..</h1> :
+                    <>
+                        {agentData}
+                    </>
+                }
             </> :
-            <></>}
+                <></>}
         </>
     )
 }
