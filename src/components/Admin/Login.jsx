@@ -6,15 +6,12 @@ function Login() {
     const navigate = useNavigate();
     const [key, setKey] = useState('');
     const [loading, setLoading] = useState(false);
-    const [err, setError] = useState(0)
-    const [Success, setSuccess] = useState(0)
 
     const Authenticate = async (e) => {
         e.preventDefault();
-        setError(0)
         setLoading(1)
         let data = {
-            admin_key: "iamadmin"
+            admin_key: key
         }
         console.log(JSON.stringify(data));
         await fetch(`${process.env.REACT_APP_BASE_URL}/admin/login`, {
@@ -26,8 +23,7 @@ function Login() {
         })
             .then(response => response.json())
             .then(json => {
-                console.log(json)
-                if (json) {
+                if (json.token && json.role=="admin") {
                     localStorage.setItem("token", json.token);
                     localStorage.setItem("role", json.role);
                     navigate("/admin/dashboard");
@@ -43,7 +39,7 @@ function Login() {
     return (
         <>
             <label for="admin">ADMIN KEY</label>
-            <input type="text" value={key} onChange={(e) => setKey(e.target.value)} name="admin"></input>
+            <input type="password" value={key} onChange={(e) => setKey(e.target.value)} name="admin"></input>
             <button onClick={Authenticate}>LOGIN</button>
             {loading ? <h1>Authenticating....</h1> : <></>}
         </>

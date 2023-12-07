@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Switch from '@mui/material/Switch';
+import { useNavigate } from "react-router-dom";
+import { AuthVerify } from "../../helper/JWTVerify";
 
 function Page() {
+    
+    const navigate = useNavigate();
 
     const CardDonor = (donor) => {
         return (
@@ -90,8 +94,24 @@ function Page() {
             })
     }
 
+    useEffect(()=>{
+        if(AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role")=="admin") {
+            var a = 1;
+        }
+        else {
+            navigate("/admin/login");
+        }
+    },[])
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role")
+        navigate("/admin/login");
+    } 
+
     return (
         <>
+            <button onClick={logout}>LOGOUT</button> <br></br>
             <button onClick={view_donor}>
                 VIEW DONORS
             </button>
