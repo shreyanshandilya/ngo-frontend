@@ -8,7 +8,7 @@ function Page() {
 
     const navigate = useNavigate();
 
-    const [success, setSuccess] = useState(true);
+    const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
 
     const [loading, setLoading] = useState(false);
@@ -30,29 +30,28 @@ function Page() {
         )
     }
     
-    const verifyAgent = async (agent_id) => {
+    const verifyAgent = (agent_id) => {
+        setLoading(true)
+        const token = localStorage.getItem("token")
         let data = {
-            "agent_id" : agent_id
+            agent_id : agent_id
         }
-        console.log(data);
-        await fetch(`${process.env.REACT_APP_BASE_URL}/agent/verification`, {
+        fetch(`https://ngo-api.onrender.com/agent/verification`, {
             method: "POST",
             body: JSON.stringify(data),
-            headers: {
-                "Authorization" : `Bearer ${localStorage.getItem("token")}`
+            headers: { 
+                "Authorization" : `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
             }
         })
             .then(response => response.json())
             .then(json => {
-                console.log(json)
                 if(json.message == "verified succesfully") {
-                    console.log(data)
-                    alert("Verified User")
-                }
-                else {
-                    alert("Error")
+                    alert("Agent Verified")
+                    window.location.reload()
                 }
             });
+        setLoading(false)
     }
 
     const CardAgent = (agent) => {
@@ -68,7 +67,7 @@ function Page() {
                         <p>Email: <strong>{agent["agent_email"] ? "Yes" : "No"}</strong></p>
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
-                        {agent["agent_verified"] ? <><button disabled>AGENT VERIFIED</button></> : <>                        <button onClick={() => verifyAgent(agent_id) } disabled={loading}>MARK VERIFIED</button> </>}
+                        {agent["agent_verified"] ? <><button disabled>AGENT VERIFIED</button></> : <><button onClick={() => verifyAgent(agent_id) } disabled={loading}>MARK VERIFIED</button></>}
                     </div>
                 </div>
             </div>
