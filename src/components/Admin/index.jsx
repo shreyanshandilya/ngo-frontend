@@ -8,6 +8,11 @@ function Page() {
 
     const navigate = useNavigate();
 
+    const [success, setSuccess] = useState(true);
+    const [error, setError] = useState(false);
+
+    const [loading, setLoading] = useState(false);
+
     const CardDonor = (donor) => {
         return (
             <div className="productCardHolder">
@@ -24,8 +29,34 @@ function Page() {
             </div>
         )
     }
+    
+    const verifyAgent = async (agent_id) => {
+        let data = {
+            "agent_id" : agent_id
+        }
+        console.log(data);
+        await fetch(`${process.env.REACT_APP_BASE_URL}/agent/verification`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Authorization" : `Bearer ${localStorage.getItem("token")}`
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json)
+                if(json.message == "verified succesfully") {
+                    console.log(data)
+                    alert("Verified User")
+                }
+                else {
+                    alert("Error")
+                }
+            });
+    }
 
     const CardAgent = (agent) => {
+        const agent_id = agent["_id"];
         return (
             <div className="productCardHolder">
                 <h4><strong>{agent["agent_name"]}</strong> {agent["agent_mob_number"]}</h4>
@@ -37,6 +68,7 @@ function Page() {
                         <p>Email: <strong>{agent["agent_email"] ? "Yes" : "No"}</strong></p>
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
+                        {agent["agent_verified"] ? <><button disabled>AGENT VERIFIED</button></> : <>                        <button onClick={() => verifyAgent(agent_id) } disabled={loading}>MARK VERIFIED</button> </>}
                     </div>
                 </div>
             </div>
@@ -88,7 +120,6 @@ function Page() {
 
     useEffect(() => {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") == "admin") {
-            var a = 1;
         }
         else {
             navigate("/admin/login");
