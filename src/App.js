@@ -16,6 +16,7 @@ import Profile from './pages/Profile';
 import DonationPage from './pages/DonationPage';
 import Show1 from './pages/Show1';
 import Admin from './components/Admin';
+import AdminLogin from './components/Admin/Login';
 
 function App() {
   const { logout } = useLogout()
@@ -81,6 +82,10 @@ function App() {
             />
             <Route
               path="/admin"
+              element={<AdminLogin />}
+            />
+            <Route
+              path="/admin/dashboard"
               element={<Admin />}
             />
           </Routes>
