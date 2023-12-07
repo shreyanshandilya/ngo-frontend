@@ -23,9 +23,7 @@ function Login() {
               "Content-type": "application/json"
             }
           })
-            .then(response => { 
-                response.json()
-            })
+            .then(response => response.json())
             .then(json => {
                 console.log(json)
                 if(json) {
@@ -50,5 +48,6 @@ function Login() {
         </>
     )
 }
+
 
 export default Login;
