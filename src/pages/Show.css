@@ -61,6 +61,7 @@ button:hover {
         text-align: center;
     }
     .SliderDiv {
+        flex: 0 0 0%;
         width: 99%;
         height: fit-content;
         border-radius: 8px;

@@ -9,6 +9,7 @@ const divStyle = {
     display: 'flex',
     alignItems: 'center',
     height: '40vh',
+    width: 'fit-content',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
     backgroundSize: 'contain'

@@ -42,13 +42,6 @@
     overflow: hidden;
 }
 
-.SliderDiv {
-    flex: 0 0 40%;
-    width: 40%;
-    border-radius: 8px;
-    background-color: rgb(220, 216, 216, 0.5);
-}
-
 .productDetailsDiv {
     justify-content: center;
     align-items: center;

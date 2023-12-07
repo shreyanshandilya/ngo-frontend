@@ -10,7 +10,7 @@ function Page() {
 
     const [success, setSuccess] = useState(true);
     const [error, setError] = useState(false);
-
+    const token = localStorage.getItem("token");
     const [loading, setLoading] = useState(false);
 
     const CardDonor = (donor) => {
@@ -29,23 +29,23 @@ function Page() {
             </div>
         )
     }
-    
+
     const verifyAgent = async (agent_id) => {
-        let data = {
-            "agent_id" : agent_id
+        const data = {
+            agent_id: agent_id
         }
-        console.log(data);
         await fetch(`${process.env.REACT_APP_BASE_URL}/agent/verification`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                "Authorization" : `Bearer ${localStorage.getItem("token")}`
+                "Authorization": `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
             }
         })
             .then(response => response.json())
             .then(json => {
                 console.log(json)
-                if(json.message == "verified succesfully") {
+                if (json.message == "verified succesfully") {
                     console.log(data)
                     alert("Verified User")
                 }
@@ -68,7 +68,7 @@ function Page() {
                         <p>Email: <strong>{agent["agent_email"] ? "Yes" : "No"}</strong></p>
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
-                        {agent["agent_verified"] ? <><button disabled>AGENT VERIFIED</button></> : <>                        <button onClick={() => verifyAgent(agent_id) } disabled={loading}>MARK VERIFIED</button> </>}
+                        {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
                     </div>
                 </div>
             </div>
