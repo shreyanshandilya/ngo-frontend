@@ -68,9 +68,9 @@ function App() {
               path="/view"
               element={<View />}
             />
-            <Route 
-              path="/profile" 
-              element={<Profile />} 
+            <Route
+              path="/profile"
+              element={<Profile />}
             />
             <Route
               path="/donate_product"
@@ -81,7 +81,7 @@ function App() {
               element={<Show1 />}
             />
             <Route
-              path="/admin"
+              path="/admin/login"
               element={<AdminLogin />}
             />
             <Route
