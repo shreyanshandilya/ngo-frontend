@@ -61,7 +61,7 @@ function App() {
     let o = []
     useEffect(() => {
         setLoading(true)
-        fetch('https://ngo-api.onrender.com/product/')
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/`)
             .then(response => response.json())
             .then(data => {
                 setLoading(false)

@@ -35,7 +35,7 @@ function Page() {
         let data = {
             agent_id: agent_id
         }
-        fetch(`https://ngo-api.onrender.com/agent/verification`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/agent/verification`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -59,7 +59,7 @@ function Page() {
             agent_id: agent_id,
             agent_active: activity
         }
-        fetch(`https://ngo-api.onrender.com/agent/toggleActivity`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/agent/toggleActivity`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -70,7 +70,7 @@ function Page() {
             .then(response => response.json())
             .then(json => {
                 if (json.message == "active status updated succesfully") {
-                    if(activity )alert("Agent Status Is Active")
+                    if (activity) alert("Agent Status Is Active")
                     else alert("Agent Status Is Inactive")
                     window.location.reload()
                 }
@@ -94,7 +94,7 @@ function Page() {
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
                         {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
-                        {agent["agent_active"] ? <button onClick={()=>toggleActivity(agent_id,0)}>MAKE AGENT INACTIVE</button> : <button onClick={()=>toggleActivity(agent_id,1)}>MAKE AGENT ACTIVE</button>}
+                        {agent["agent_active"] ? <button onClick={() => toggleActivity(agent_id, 0)}>MAKE AGENT INACTIVE</button> : <button onClick={() => toggleActivity(agent_id, 1)}>MAKE AGENT ACTIVE</button>}
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@ function Page() {
         setAgentLoaded(true);
         setLoadingAgent(true);
         let demo = [];
-        fetch('https://ngo-api.onrender.com/agent/getTopAgent')
+        fetch(`${process.env.REACT_APP_BASE_URL}/agent/getTopAgent`)
             .then(response => response.json())
             .then(async (data) => {
                 demo = data.map(x => CardAgent(x));
@@ -131,7 +131,7 @@ function Page() {
         setDonorLoading(true);
         let anonymous = [];
         let non_anonymous = [];
-        fetch('https://ngo-api.onrender.com/donor/getTopDonor')
+        fetch(`${process.env.REACT_APP_BASE_URL}/donor/getTopDonor`)
             .then(res => res.json())
             .then(data => {
                 for (var i = 0; i < data.length; i++) {

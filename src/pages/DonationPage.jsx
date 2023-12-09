@@ -17,7 +17,7 @@ const DonationPage = () => {
     const token = localStorage.getItem("token")
     useEffect(() => {
         setLoading(true)
-        fetch('https://ngo-api.onrender.com/donor/view', {
+        fetch(`${process.env.REACT_APP_BASE_URL}/donor/view`, {
             headers: { "Authorization": `Bearer ${token}` }
         })
             .then(response => response.json())
@@ -65,7 +65,7 @@ const DonationPage = () => {
     return (<>
         <Navbar />
         <div className="conts">
-            {!donor["donor"] ? <>Loading</> : <></>}
+            {!donor["donor"] ? <h1><strong>Please Login As A Donor</strong></h1> : <></>}
             {donor["donor"] ?
                 <form className="form">
                     <h1><strong>Enter Product Details</strong></h1>

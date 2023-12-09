@@ -38,7 +38,7 @@ function Individual() {
             product_id: formId,
             agent_id: agent
         }
-        fetch(`https://ngo-api.onrender.com/product/assign_agent`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/assign_agent`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -67,7 +67,7 @@ function Individual() {
             agent_id: agent,
             product_otp: otpVal
         }
-        fetch(`https://ngo-api.onrender.com/product/collect`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/collect`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -106,7 +106,7 @@ function Individual() {
             product_defects_after: info,
             prodcut_repair_amount: price
         }
-        fetch(`https://ngo-api.onrender.com/product/repair`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/repair`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -133,7 +133,7 @@ function Individual() {
             product_id: formId,
             agent_id: agent
         }
-        fetch(`https://ngo-api.onrender.com/product/receive`, {
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/receive`, {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -156,7 +156,7 @@ function Individual() {
     useEffect(() => {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") == "agent") {
             const token = localStorage.getItem("token")
-            fetch('https://ngo-api.onrender.com/agent/view', {
+            fetch(`${process.env.REACT_APP_BASE_URL}/agent/view`, {
                 headers: { "Authorization": `Bearer ${token}` }
             })
                 .then(response => response.json())
@@ -166,7 +166,7 @@ function Individual() {
                 });
         }
         setLoading(true)
-        fetch(`https://ngo-api.onrender.com/product/${formId}`)
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/${formId}`)
             .then(response => response.json())
             .then(data => {
                 setLoading(false)

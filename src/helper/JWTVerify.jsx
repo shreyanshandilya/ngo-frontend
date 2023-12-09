@@ -1,4 +1,3 @@
-import React from "react";
 const parseJwt = (token) => {
   try {
     return JSON.parse(atob(token.split(".")[1]));
@@ -8,13 +7,13 @@ const parseJwt = (token) => {
 };
 
 export function AuthVerify() {
-    const accessToken = localStorage.getItem("token");
-    if (accessToken) {
-      const decodedJwt = parseJwt(accessToken);
-      if (decodedJwt.exp * 1000 < Date.now()) {
-        return false;
-      }
+  const accessToken = localStorage.getItem("token");
+  if (accessToken) {
+    const decodedJwt = parseJwt(accessToken);
+    if (decodedJwt.exp * 1000 < Date.now()) {
+      return false;
     }
+  }
   return true;
 };
 

@@ -36,7 +36,7 @@ function Profile() {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") != "agent") {
             navigate('/');
         }
-        fetch('https://ngo-api.onrender.com/agent/view', {
+        fetch(`${process.env.REACT_APP_BASE_URL}/agent/view`, {
             headers: { "Authorization": `Bearer ${token}` }
         })
             .then(response => response.json())
@@ -48,7 +48,7 @@ function Profile() {
     const view = () => {
         setLoading(1)
         setVisible(true)
-        fetch('https://ngo-api.onrender.com/product/')
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/`)
             .then(response => response.json())
             .then(data => {
                 setLoading(false)

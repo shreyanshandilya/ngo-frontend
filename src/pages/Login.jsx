@@ -19,7 +19,7 @@ const Login = () => {
       donor_email: email,
       donor_mob_number: password
     }
-    await fetch(`https://ngo-api.onrender.com/donor/verify`, {
+    await fetch(`${process.env.REACT_APP_BASE_URL}/donor/verify`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

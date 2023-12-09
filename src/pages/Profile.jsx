@@ -6,6 +6,7 @@ import prod from '../images/prod.jpg'
 import { useNavigate } from "react-router-dom";
 import { AuthVerify } from "../helper/JWTVerify";
 import Navbar from '../components/NavbarLogged';
+import { green } from "@mui/material/colors";
 
 function Card(item) {
     const url = `/view/${item["_id"]}`
@@ -13,7 +14,8 @@ function Card(item) {
         <div className="strip">
             <Link className="product" to={url} style={{ 'text-decoration': 'none', 'color': 'black' }}>
                 <p style={{ 'margin': '0' }}><strong>{item["product_title"]}</strong></p>
-                <p className="description" >{item.product_description_before} </p>
+                <p className="description">{item.product_description_before} </p>
+                <p style={{ "marginLeft": "auto", "marginBottom": "0" }}>{item.product_otp ? <h5 style={{ "color": "green", "marginBottom": "0" }}><strong>{item.product_otp}</strong></h5> : <></>}</p>
             </Link>
         </div>
     )
@@ -36,7 +38,7 @@ function Profile() {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") != "donor") {
             navigate("/");
         }
-        fetch('https://ngo-api.onrender.com/donor/view', {
+        fetch(`${process.env.REACT_APP_BASE_URL}/donor/view`, {
             headers: { "Authorization": `Bearer ${token}` }
         })
             .then(response => response.json())
@@ -49,7 +51,7 @@ function Profile() {
     const view = () => {
         setLoading(1)
         setVisible(true)
-        fetch('https://ngo-api.onrender.com/product/')
+        fetch(`${process.env.REACT_APP_BASE_URL}/product/`)
             .then(response => response.json())
             .then(data => {
                 setLoading(false)
