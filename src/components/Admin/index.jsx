@@ -53,6 +53,33 @@ function Page() {
         setLoading(false)
     }
 
+    const toggleActivity = (agent_id, activity) => {
+        const token = localStorage.getItem("token")
+        let data = {
+            agent_id: agent_id,
+            agent_active: activity
+        }
+        fetch(`https://ngo-api.onrender.com/agent/toggleActivity`, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                if (json.message == "active status updated succesfully") {
+                    if(activity )alert("Agent Status Is Active")
+                    else alert("Agent Status Is Inactive")
+                    window.location.reload()
+                }
+                else {
+                    alert("Retry")
+                }
+            });
+    }
+
     const CardAgent = (agent) => {
         const agent_id = agent["_id"];
         return (
@@ -67,6 +94,7 @@ function Page() {
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
                         {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
+                        {agent["agent_active"] ? <button onClick={()=>toggleActivity(agent_id,0)}>MAKE AGENT INACTIVE</button> : <button onClick={()=>toggleActivity(agent_id,1)}>MAKE AGENT ACTIVE</button>}
                     </div>
                 </div>
             </div>
