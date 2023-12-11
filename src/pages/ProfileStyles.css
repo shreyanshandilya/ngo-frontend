@@ -1,9 +1,9 @@
 .profile-level-up {
-    margin: 5% 15% 5% 15%;
+    margin: 5% 10% 5% 10%;
     display: flex;
     background-color: #f8f9facc;
     border-radius: 8px;
-    width: 70%;
+    width: 80%;
     align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -109,5 +109,8 @@ img {
         flex-direction: column;
         width: 100%;
         margin-bottom: 0%;
+    }
+    img {
+        width: 90%;
     }
 }

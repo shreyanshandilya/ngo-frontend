@@ -1,5 +1,5 @@
 .profile-level-up {
-    margin: 5% 15% 5% 15%;
+    margin: 5% 10% 5% 10%;
     display: flex;
     background-color: #f8f9facc;
     border-radius: 8px;
@@ -17,6 +17,15 @@ img {
 .profile {
     border-radius: 10px;
     justify-content: center;
+    align-items: center;
+    padding: 1%;
+    width: 35%;
+}
+
+.profile-right {
+    display: flex;
+    border-radius: 10px;
+    justify-content: right;
     align-items: center;
     padding: 1%;
     width: 35%;
@@ -89,6 +98,11 @@ img {
         width: 75%;
         display: flex;
     }
+    .profile-right {
+        width: 75%;
+        display: flex;
+        justify-content: center;
+    }
     .title {
         font-weight: bold;
         display: inline-block;
@@ -109,5 +123,8 @@ img {
         flex-direction: column;
         width: 100%;
         margin-bottom: 0%;
+    }
+    img {
+        width: 90%;
     }
 }

@@ -71,7 +71,7 @@ function Profile() {
                 <>
                     <div className='profile-level-up'>
                         <div className="profile" >
-                            <img className="profile-pic" src={prod}></img>
+                            <img className="profile-pic" src={(agent['agent']['agent_photo']) ? (agent['agent']['agent_photo'].url) : prod}></img>
                         </div>
                         <div className="personalDetails">
                             <div>
@@ -110,6 +110,9 @@ function Profile() {
                             <p className="button" style={{ 'width': 'fit-content', "cursor": "pointer", "backgroundColor": "rgba(255, 0, 0, 0.7)", "border": "0px" }} onClick={handleLogout}>
                                 Logout
                             </p>
+                        </div>
+                        <div className="profile-right " >
+                            <img className="id_card_pic" src={(agent['agent']['agent_id_photo']) ? (agent['agent']['agent_id_photo'].url) : prod}></img>
                         </div>
                     </div>
                     <div className="profile-level-up" style={{ 'flex-direction': 'column' }}>

@@ -20,6 +20,8 @@ const AgentSignup = () => {
   const [loading, setLoading] = useState(false);
   const [Error, setError] = useState(false);
   const [Success, setSuccess] = useState(false);
+  const [image, setImage] = useState([])
+  const [profile_pic, setProfilePic] = useState([])
 
   const card = ["Aadhar Card", "Pan Card", "Driving License", "Passport"];
   let list = []
@@ -42,20 +44,38 @@ const AgentSignup = () => {
       agent_id_type,
       agent_active
     }
+    const formData = new FormData();
+    for (let prop in data) {
+      formData.append(prop, data[prop]);
+    }
+    formData.append('image', image);
+    formData.append('image', profile_pic)
 
-    await fetch(`${process.env.REACT_APP_BASE_URL}/agent/register`, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8"
+    const response = await axios.post(
+      `${process.env.REACT_APP_BASE_URL}/agent/register`,
+      formData,
+      {
+        headers: {
+          'Content-Type': `multipart/form-data`,
+        },
       }
-    })
-      .then(response => response.json())
-      .then(json => {
-        setLoading(0)
-        setSuccess(1)
-      });
+    )
+    if (response.data.message == 'Agent Successfully registered') {
+      setLoading(0);
+      setSuccess(1);
+    }
+    else {
+      setError(1);
+    }
   }
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  }
+  const handleProfilePicChange = (e) => {
+    setProfilePic(e.target.files[0]);
+  }
+
   return (<>
     <Navbar />
     <div className="conts">
@@ -68,6 +88,15 @@ const AgentSignup = () => {
             name="agent_name"
             value={agent_name}
             onChange={e => setName(e.target.value)}
+          />
+        </div>
+        <div className="form_input">
+          <label htmlFor="profile_pic">Your Photo </label>
+          <input
+            type="file"
+            name='profile_pic'
+            id="profile_pic"
+            onChange={handleProfilePicChange}
           />
         </div>
         <div className="form_input">
@@ -134,6 +163,7 @@ const AgentSignup = () => {
             onChange={e => setPassword(e.target.value)}
           />
         </div>
+        <label><strong>Please Upload Photo of Any ID:</strong></label>
         <div className="form_input">
           <label htmlFor="agent_id_type">Id Type</label>
           <select
@@ -146,28 +176,13 @@ const AgentSignup = () => {
           </select>
         </div>
         <div className="form_input">
-          <label htmlFor="active">Active</label>
-          <div className="radio-container">
-            Yes
-            <input
-              type="radio"
-              value={agent_active}
-              name="active"
-              onChange={(e) => {
-                if (agent_active == 0) setActive(1);
-              }} className="radio"
-              disabled />
-            No
-            <input
-              type="radio"
-              value="No"
-              name="active"
-              onChange={(e) => {
-                if (agent_active == 1) setActive(0);
-              }} className="radio"
-              selected />
-
-          </div>
+          <label htmlFor="idCard">Image </label>
+          <input
+            type="file"
+            name='idCard'
+            id="idCard"
+            onChange={handleImageChange}
+          />
         </div>
         <label><strong>You will be made active upon Verification</strong></label>
         <br />

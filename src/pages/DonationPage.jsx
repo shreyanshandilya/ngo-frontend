@@ -36,7 +36,11 @@ const DonationPage = () => {
         setSuccess(0);
         setError(0);
         let data = {
-            product_title, product_category, product_description_before, product_defects_before, product_area_of_donation,
+            product_title,
+            product_category,
+            product_description_before,
+            product_defects_before,
+            product_area_of_donation,
             donor_mob_number: donor["donor"]["donor_mob_number"]
         }
         const formData = new FormData();
