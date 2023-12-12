@@ -24,6 +24,8 @@ function Profile() {
     const [agent, setAgent] = useState({});
     const [visible, setVisible] = useState();
     const [loading1, setLoading1] = useState(false);
+    const [verify, setVerify] = useState(true);
+    const [inactive , setInactive] = useState(false);
     const token = localStorage.getItem("token");
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -41,7 +43,15 @@ function Profile() {
         })
             .then(response => response.json())
             .then(data => {
-                setAgent(data)
+                if(!data["agent"]["agent_active"]) {
+                    setInactive(true);
+                }
+                else if(data["agent"]["agent_verified"]) {
+                    setAgent(data)
+                }
+                else {
+                    setVerify(false);
+                }
                 setLoading(false)
             });
     }, []);
@@ -66,7 +76,10 @@ function Profile() {
     return (
         <>
             <Navbar />
-            {!agent["agent"] ? <h1>Loading</h1> : <></>}
+            {loading ? <h1>Loading</h1> : <></>}
+            {!verify ? <h1>Verification Pending</h1> : <></>}
+            {inactive ? <h1>Agent has been set inactive</h1> : <></>}
+            {verify ? <>
             {agent["agent"] ?
                 <>
                     <div className='profile-level-up'>
@@ -127,6 +140,7 @@ function Profile() {
                 </> : <></>
 
             }
+            </> : <></>}
         </ >
     )
 }
