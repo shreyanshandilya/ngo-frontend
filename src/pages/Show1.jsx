@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import './Show1.css'
 import { AuthVerify } from "../helper/JWTVerify";
 import Navbar from '../components/NavbarLogged';
+import axios from "axios";
 
 const divStyle = {
     display: 'flex',
@@ -30,6 +31,10 @@ function Individual() {
     const [description, setDescription] = useState('');
     const [otpVal, setOtpVal] = useState('');
     const [price, setPrice] = useState('');
+    const [image, setImage] = useState([])
+    const [handoverModal, setHandoverModal] = useState(false);
+    const [receiverName, setReceiverName] = useState('');
+    const [receiverAadharNumber, setReceiverAadharNumber] = useState('');
 
     const claim = () => {
         setLoading1(true)
@@ -95,9 +100,11 @@ function Individual() {
         setRepairModal(true)
     }
 
-
-    const repairSubmit = (e) => {
+    const repairSubmit = async (e) => {
         setError(0)
+        setLoading(1);
+        setSuccess(0);
+        setError(0);
         e.preventDefault();
         let data = {
             product_id: formId,
@@ -106,31 +113,67 @@ function Individual() {
             product_defects_after: info,
             prodcut_repair_amount: price
         }
-        fetch(`${process.env.REACT_APP_BASE_URL}/product/repair`, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
+        const formData = new FormData();
+        for (let prop in data) {
+            formData.append(prop, data[prop]);
+        }
+        for (const img of image) { // images is an array of File Object
+            formData.append('image', img, img.name); // multiple upload
+        }
+
+        const response = await axios.post(
+            `${process.env.REACT_APP_BASE_URL}/product/repair`,
+            formData,
+            {
+                headers: {
+                    'Content-Type': `multipart/form-data`,
+                },
             }
-        })
-            .then(response => response.json())
-            .then(json => {
-                if (json.message == "Product details Succesfully Updated") {
-                    setSuccess(true);
-                    setLoading1(false);
-                }
-                else {
-                    setError(true);
-                    setLoading1(false)
-                }
-            });
+        )
+        if(response.data.message=='Product details Succesfully Updated'){
+            setLoading(0);
+            setSuccess(1);
+        }
+        else{
+            setError(1);
+        }
+        // fetch(`${process.env.REACT_APP_BASE_URL}/product/repair`, {
+        //     method: "POST",
+        //     body: JSON.stringify(data),
+        //     headers: {
+        //         "Content-type": "application/json; charset=UTF-8"
+        //     }
+        // })
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         if (json.message == "Product details Succesfully Updated") {
+        //             setSuccess(true);
+        //             setLoading1(false);
+        //         }
+        //         else {
+        //             setError(true);
+        //             setLoading1(false)
+        //         }
+        //     });
     }
 
-    const handover = () => {
+    const handleImageChange = (e) => {
+        setImage(e.target.files);
+    }
+
+    
+    const handover = ()=>{
+        setHandoverModal(true);
+    }
+
+    const handoverSubmit = (e) => {
+        e.preventDefault();
         setLoading1(true)
         setError(false)
         let data = {
             product_id: formId,
+            receiver_aadhar_number:receiverAadharNumber,
+            receiver_name:receiverName,
             agent_id: agent
         }
         fetch(`${process.env.REACT_APP_BASE_URL}/product/receive`, {
@@ -142,13 +185,14 @@ function Individual() {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.error) {
-                    setError(true);
-                    setLoading1(false)
-                }
-                else {
+                if (json.message == "Final Donation Successful") {
                     setSuccess(true);
                     setLoading1(false);
+                }
+                else {
+                    console.log(json.message);
+                    setError(true);
+                    setLoading1(false)
                 }
             });
     }
@@ -266,6 +310,14 @@ function Individual() {
                                                                                 onChange={(e) => setPrice(e.target.value)}
                                                                             />
                                                                         </div>
+                                                                        <div className="form_input">
+                                                                            <label htmlFor="product_image">Image </label>
+                                                                            <input
+                                                                                type="file"
+                                                                                onChange={handleImageChange}
+                                                                                multiple
+                                                                            />
+                                                                        </div>
                                                                         <button onClick={repairSubmit}>SUBMIT</button>
                                                                         {error ? <p>ERROR! Please try again</p> : <></>}
                                                                         {success ? <p>Successfully Submitted!</p> : <></>}
@@ -292,12 +344,36 @@ function Individual() {
 
                             {item.product_repair_status && !item.product_received ?
                                 <>
-                                    <button onClick={handover}>
-                                        HANDOVER
-                                    </button>
-                                    {error ? <p>ERROR! Please try again</p> : <></>}
-                                    {success ? <p>Successfully Donated!</p> : <></>}
-                                    {loading1 ? <p>Processing Request....</p> : <></>}
+                                    <button onClick={handover}>HANDOVER</button>
+                                    {handoverModal?
+                                        <form>
+                                            <div className="form_input">
+                                                <label htmlFor="receiverName">Receiver Name:</label>
+                                                <input
+                                                    type="text"
+                                                    id="receiverName"
+                                                    name="receiverName"
+                                                    value={receiverName}
+                                                    onChange={(e) => setReceiverName(e.target.value)}
+                                                />
+                                            </div>
+                                            <div className="form_input">
+                                                <label htmlFor="receiverAadharNumber">Aadhar Number:</label>
+                                                <input
+                                                    type="text"
+                                                    id="receiverAadharNumber"
+                                                    name="receiverAadharNumber"
+                                                    value={receiverAadharNumber}
+                                                    onChange={(e) => setReceiverAadharNumber(e.target.value)}
+                                                />
+                                            </div>
+                                            <button onClick={handoverSubmit}>SUBMIT</button>
+                                            {error ? <p>ERROR! Please try again</p> : <></>}
+                                            {success ? <p>Successfully Donated!</p> : <></>}
+                                            {loading1 ? <p>Processing Request....</p> : <></>}
+                                        </form>
+                                    :<></>}
+                            
                                 </> :
 
                                 <></>
