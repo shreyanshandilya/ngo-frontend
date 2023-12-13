@@ -405,6 +405,12 @@ function Individual() {
                     </div>
                 </> : <></>
             }
+            {item.product_received ? <div className="donorInfo">
+                <p style={{ "fontSize": "200%" }}><strong>Receiver Details</strong></p>
+                <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
+                <p><strong>Aadhar Number : </strong>{item.product_receiver.receiver_aadhar_number}</p>
+            </div>
+            : <></>}
         </>
     )
 }
