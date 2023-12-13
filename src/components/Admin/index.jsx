@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthVerify } from "../../helper/JWTVerify";
 import Navbar from '../../components/NavbarLogged'
 import './Show.css'
+import { Link } from 'react-router-dom';
 
 function Page() {
 
@@ -13,6 +14,7 @@ function Page() {
     const [loading, setLoading] = useState(false);
 
     const CardDonor = (donor) => {
+        const url = `/admin/donor/${donor["_id"]}`
         return (
             <div className="productCardHolder">
                 <h4><strong>{donor["donor_name"]}</strong> {donor["donor_mob_number"]}</h4>
@@ -23,6 +25,7 @@ function Page() {
                         <p>{donor["donor_id_type"]} Number: <strong>{donor["donor_id_number"]}</strong></p>
                         <p>Pan Number: <strong>{donor["donor_pan_number"]}</strong></p>
                         <p>Anonymous: <strong>{donor["donor_anonymous"] ? <>Yes</> : <>No</>}</strong></p>
+                        <Link to = {url} target='_blank'><button>VIEW PROFILE</button></Link>
                     </div>
                 </div>
             </div>
@@ -82,6 +85,7 @@ function Page() {
 
     const CardAgent = (agent) => {
         const agent_id = agent["_id"];
+        const url = `/admin/agent/${agent["_id"]}`
         return (
             <div className="productCardHolder">
                 <h4><strong>{agent["agent_name"]}</strong> {agent["agent_mob_number"]}</h4>
@@ -93,6 +97,7 @@ function Page() {
                         <p>Email: <strong>{agent["agent_email"] ? "Yes" : "No"}</strong></p>
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
+                        <Link to = {url} target='_blank'><button>VIEW PROFILE</button></Link>
                         {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
                         {agent["agent_active"] ? <button onClick={() => toggleActivity(agent_id, 0)}>MAKE AGENT INACTIVE</button> : <button onClick={() => toggleActivity(agent_id, 1)}>MAKE AGENT ACTIVE</button>}
                     </div>

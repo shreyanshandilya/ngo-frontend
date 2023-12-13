@@ -35,6 +35,7 @@ function Individual() {
     const [handoverModal, setHandoverModal] = useState(false);
     const [receiverName, setReceiverName] = useState('');
     const [receiverAadharNumber, setReceiverAadharNumber] = useState('');
+    const [isAgent, setisAgent] = useState(false);
 
     const claim = () => {
         setLoading1(true)
@@ -199,6 +200,8 @@ function Individual() {
 
     useEffect(() => {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") == "agent") {
+            setisAgent(true);
+            console.log(isAgent)
             const token = localStorage.getItem("token")
             fetch(`${process.env.REACT_APP_BASE_URL}/agent/view`, {
                 headers: { "Authorization": `Bearer ${token}` }
@@ -246,7 +249,7 @@ function Individual() {
                             <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
 
-
+                            {isAgent ?  <>
                             {(agent != "0" && agentActive) ?
                                 <>
                                     {item.product_agent ?
@@ -339,9 +342,9 @@ function Individual() {
                                         </>}
                                 </>
                                 : <></>
-                            }
+                            }</> : <></>}
 
-
+                            {isAgent ? <>
                             {item.product_repair_status && !item.product_received ?
                                 <>
                                     <button onClick={handover}>HANDOVER</button>
@@ -377,7 +380,7 @@ function Individual() {
                                 </> :
 
                                 <></>
-                            }
+                            }</> : <></>}
 
                             {item.product_received ?
                                 <p style={{ 'color': 'green', }}><strong>

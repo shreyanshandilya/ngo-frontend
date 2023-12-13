@@ -1,0 +1,116 @@
+.profile-level-up {
+    margin: 5% 10% 5% 10%;
+    display: flex;
+    background-color: #f8f9facc;
+    border-radius: 8px;
+    width: 80%;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+img {
+    border-radius: 4px;
+    width: 80%;
+    height: auto;
+}
+
+.profile {
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 1%;
+    width: 35%;
+}
+
+.profile-pic {
+    border-radius: 50%;
+}
+
+.header {
+    height: 10vh;
+}
+
+.personalDetails {
+    display: inline-block;
+    margin: 10px 0;
+    border-radius: 10px;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-weight: bold;
+    display: inline-block;
+    margin: 4px 20px 4px 4px;
+}
+
+.strip {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    border-radius: 8px;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.product-list {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.description {
+    margin-left: 5%;
+}
+
+@media (max-width: 700px) {
+    .profile-level-up {
+        margin: 10% 5% 2% 5%;
+        flex-direction: column;
+        align-items: center;
+        width: 90%;
+    }
+    .personalDetails {
+        text-align: center;
+    }
+    .profile {
+        width: 75%;
+        display: flex;
+    }
+    .title {
+        font-weight: bold;
+        display: inline-block;
+        margin: 4px 10px 4px 4px;
+    }
+    .strip {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0%;
+    }
+    .donate-button {
+        position: relative;
+        margin: 0 0 0 20%;
+    }
+    .product {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0%;
+    }
+    img {
+        width: 90%;
+    }
+}
