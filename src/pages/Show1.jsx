@@ -408,9 +408,27 @@ function Individual() {
             {item.product_received ? <div className="donorInfo">
                 <p style={{ "fontSize": "200%" }}><strong>Receiver Details</strong></p>
                 <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
-                <p><strong>Aadhar Number : </strong>{item.product_receiver.receiver_aadhar_number}</p>
+                <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
             </div>
                 : <></>}
+            {item.product_repair_status ? <div className="donorInfo">
+                <p style={{ "fontSize": "200%" }}><strong>Repair Details</strong></p>
+                <p><strong>Defects : </strong>{item.product_defects_after}</p>
+                <p><strong>Description : </strong>{item.product_description_after}</p>
+                <p><strong>Price : </strong>{item.product_repair_amount}</p>
+                <p><strong>Images after repair :</strong></p>
+                        <div className="SliderDivOne">
+                            <Slide>
+                                {item.product_pictures_before.map((slideImage, index) => (
+                                    <div key={index}>
+                                        <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                                        </div>
+                                    </div>
+                                ))}
+                            </Slide>
+                        </div>
+            </div>
+            : <></>}
         </>
     )
 }
