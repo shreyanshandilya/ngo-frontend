@@ -14,6 +14,7 @@ import {
 } from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
 
+
 function Navbar() {
   const handleLogout = () => {
     let navto = '/';
@@ -43,7 +44,9 @@ function Navbar() {
           >
             <MDBIcon icon='bars' fas />
           </MDBNavbarToggler>
-          <MDBNavbarBrand href='#'><strong>NGO</strong></MDBNavbarBrand>
+          <MDBNavbarBrand href='/'>
+            <strong>Dil se Daan</strong>
+          </MDBNavbarBrand>
           <MDBCollapse navbar open={openNavNoTogglerThird}>
             <MDBNavbarNav className='mr-auto mb-2 mb-lg-0'>
               <MDBNavbarItem>
@@ -66,7 +69,7 @@ function Navbar() {
             </MDBNavbarNav>
             <MDBInputGroup style={{ 'alignItems': 'center', 'justifyContent': 'center' }} tag="form" className='d-flex w-auto mb-3'>
               {!localStorage.role ? <>
-                <MDBBtn className='button' style={{ 'width': 'fit-content' }} outline onClick={() => navigate("/donate")}>Donate</MDBBtn>
+                <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'border': 'none', 'color': 'white' }} outline onClick={() => navigate("/donate")}>Donate</MDBBtn>
               </> : <></>}
               {localStorage.role == 'donor' ?
                 <MDBBtn className='donate' style={{ 'width': 'fit-content', 'marginBottom': '0%', 'marginRight': '0%', 'border': 'none', 'color': 'white' }} outline onClick={() => navigate("/donate_product")}>Donate</MDBBtn>

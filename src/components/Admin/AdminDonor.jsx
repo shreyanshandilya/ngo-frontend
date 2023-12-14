@@ -44,7 +44,7 @@ function Profile() {
             .then(response => response.json())
             .then(data => {
                 data.forEach(async (x) => {
-                    if(x["_id"]==id.id) {
+                    if (x["_id"] == id.id) {
                         await setDonor(x);
                         console.log(donor);
                         setLoading(false);
@@ -113,7 +113,7 @@ function Profile() {
                         </div>
                     </div>
                     <div className="profile-level-up" style={{ 'flex-direction': 'column' }}>
-                        <h2><strong>Your Donations</strong></h2>
+                        <h2><strong>Donated Items</strong></h2>
                         {loading1 ? <p>Loading..</p> : <></>}
                         <button className="donate" style={{ 'padding': '0.5% 1% 0.5% 1%' }} onClick={view}>VIEW</button>
                         <div className="product-list" style={{ "width": "80%" }}>

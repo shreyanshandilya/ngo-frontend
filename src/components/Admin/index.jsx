@@ -25,7 +25,7 @@ function Page() {
                         <p>{donor["donor_id_type"]} Number: <strong>{donor["donor_id_number"]}</strong></p>
                         <p>Pan Number: <strong>{donor["donor_pan_number"]}</strong></p>
                         <p>Anonymous: <strong>{donor["donor_anonymous"] ? <>Yes</> : <>No</>}</strong></p>
-                        <Link to = {url} target='_blank'><button>VIEW PROFILE</button></Link>
+                        <Link to={url} target='_blank'><button className="donate" style={{ "padding": "0em 0.2em 0em 0.2em" }}>View Donor</button></Link>
                     </div>
                 </div>
             </div>
@@ -97,9 +97,10 @@ function Page() {
                         <p>Email: <strong>{agent["agent_email"] ? "Yes" : "No"}</strong></p>
                         <p>ID Type: <strong>{agent["agent_id_type"]}</strong></p>
                         <p>Aadhar Number: <strong>{agent["agent_aadhar_number"]}</strong></p>
-                        <Link to = {url} target='_blank'><button>VIEW PROFILE</button></Link>
-                        {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
-                        {agent["agent_active"] ? <button onClick={() => toggleActivity(agent_id, 0)}>MAKE AGENT INACTIVE</button> : <button onClick={() => toggleActivity(agent_id, 1)}>MAKE AGENT ACTIVE</button>}
+
+                        {agent["agent_verified"] ? <strong><p style={{ color: "green" }}>Agent Verified</p></strong> : <> <button className="donate" style={{ "padding": "0em 0.2em 0em 0.2em" }} onClick={() => verifyAgent(agent_id)} disabled={loading}>Verify Agent</button> </>}
+                        {agent["agent_verified"] ? (agent["agent_active"] ? <button className="donate" style={{ "padding": "0em 0.2em 0em 0.2em" }} onClick={() => toggleActivity(agent_id, 0)}>Deactivate</button> : <button className="donate" style={{ "padding": "0em 0.2em 0em 0.2em" }} onClick={() => toggleActivity(agent_id, 1)}>Activate</button>) : <></>}
+                        <Link to={url} target='_blank'><button className="donate" style={{ "padding": "0em 0.2em 0em 0.2em" }}>View Agent</button></Link>
                     </div>
                 </div>
             </div>
@@ -168,7 +169,7 @@ function Page() {
             <Navbar />
             <div className='showPage'>
                 <div className='showColumn'>
-                    <button onClick={view_donor}>
+                    <button className="donate" onClick={view_donor}>
                         View Donors
                     </button>
                     {donorLoaded ? <>
@@ -182,7 +183,7 @@ function Page() {
                     </> : <></>}
                 </div>
                 <div className="showColumn">
-                    <button onClick={view_agent}>
+                    <button className="donate" onClick={view_agent}>
                         View Agents
                     </button>
                     {agentLoaded ? <>

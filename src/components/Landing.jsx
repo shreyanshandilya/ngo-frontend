@@ -4,6 +4,7 @@ import rest from '../images/rest.jpg'
 import prod from '../images/prod.jpg';
 import don from '../images/don.jpg'
 import Navbar from './NavbarLogged.jsx'
+import logo from '../images/logo.png'
 
 function Landing() {
     const navigate = useNavigate();
@@ -122,7 +123,25 @@ function Landing() {
                 </div>
                 <div className="content">
                     <h2><strong>About Us</strong></h2>
+                    <div className='content-row-rev' style={{ "background": "none", "max-width": "800px" }}>
+                        <img src={logo} className='img' style={{ "width": "8em", "height": "8em", "margin": "0 0 0 0", "padding": "0 0 0 0" }} />
 
+                        <div className='content-inside'>
+                            <h4 style={{ 'textAlign': 'left' }}>Locations</h4>
+                            <ol style={{ 'textAlign': 'left' }}>
+                                <li>Dhanbad</li>
+                                <li>Ranchi</li>
+                            </ol>
+                        </div>
+                        <div className='content-inside'>
+                            <h4 style={{ 'textAlign': 'left' }}>Founders</h4>
+                            <ol style={{ 'textAlign': 'left' }}>
+                                <li>Founder 1</li>
+                                <li>Founder 2</li>
+                            </ol>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </>
