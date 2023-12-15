@@ -131,11 +131,11 @@ function Individual() {
                 },
             }
         )
-        if(response.data.message=='Product details Succesfully Updated'){
+        if (response.data.message == 'Product details Succesfully Updated') {
             setLoading(0);
             setSuccess(1);
         }
-        else{
+        else {
             setError(1);
         }
         // fetch(`${process.env.REACT_APP_BASE_URL}/product/repair`, {
@@ -162,8 +162,8 @@ function Individual() {
         setImage(e.target.files);
     }
 
-    
-    const handover = ()=>{
+
+    const handover = () => {
         setHandoverModal(true);
     }
 
@@ -173,8 +173,8 @@ function Individual() {
         setError(false)
         let data = {
             product_id: formId,
-            receiver_aadhar_number:receiverAadharNumber,
-            receiver_name:receiverName,
+            receiver_aadhar_number: receiverAadharNumber,
+            receiver_name: receiverName,
             agent_id: agent
         }
         fetch(`${process.env.REACT_APP_BASE_URL}/product/receive`, {
@@ -249,142 +249,142 @@ function Individual() {
                             <p><strong>Reimbursement Status  </strong> {item.product_reimbursement_status == false ? "False" : "True"}</p>
                             <p><strong>Repair Status  </strong> {item.product_repair_status == false ? "Not Repaired" : "Repaired"}</p>
 
-                            {isAgent ?  <>
-                            {(agent != "0" && agentActive) ?
-                                <>
-                                    {item.product_agent ?
-                                        (item.product_agent["_id"] === agent ?
-                                            <>
-                                                {!item.product_collection_status ? <>
-                                                    <button onClick={otp}>COLLECT</button>
-                                                    {otpModal ? <>
-                                                        <form>
-                                                            <div className="form_input">
-                                                                <label htmlFor="otpval">Enter OTP:</label>
-                                                                <input
-                                                                    type="text"
-                                                                    id="otpval"
-                                                                    name="otp"
-                                                                    value={otpVal}
-                                                                    onChange={(e) => setOtpVal(e.target.value)}
-                                                                />
-                                                            </div>
-                                                            <button onClick={collect}>SUBMIT</button>
-                                                            {error ? <p>ERROR! Please try again</p> : <></>}
-                                                            {success ? <p>Successfully Collected!</p> : <></>}
-                                                            {loading1 ? <p>Processing Request....</p> : <></>}
-                                                        </form>
-                                                    </> : <></>
+                            {isAgent ? <>
+                                {(agent != "0" && agentActive) ?
+                                    <>
+                                        {item.product_agent ?
+                                            (item.product_agent["_id"] === agent ?
+                                                <>
+                                                    {!item.product_collection_status ? <>
+                                                        <button onClick={otp}>COLLECT</button>
+                                                        {otpModal ? <>
+                                                            <form>
+                                                                <div className="form_input">
+                                                                    <label htmlFor="otpval">Enter OTP:</label>
+                                                                    <input
+                                                                        type="text"
+                                                                        id="otpval"
+                                                                        name="otp"
+                                                                        value={otpVal}
+                                                                        onChange={(e) => setOtpVal(e.target.value)}
+                                                                    />
+                                                                </div>
+                                                                <button onClick={collect}>SUBMIT</button>
+                                                                {error ? <p>ERROR! Please try again</p> : <></>}
+                                                                {success ? <p>Successfully Collected!</p> : <></>}
+                                                                {loading1 ? <p>Processing Request....</p> : <></>}
+                                                            </form>
+                                                        </> : <></>
 
-                                                    }
-                                                </> : (
-                                                    <>
-                                                        {!item.product_repair_status ?
-                                                            <>
-                                                                <button onClick={repair}>REPAIR</button>
-                                                                {repairModal ? <>
-                                                                    <form>
-                                                                        <div className="form_input">
-                                                                            <label htmlFor="description">Description:</label>
-                                                                            <input
-                                                                                type="text"
-                                                                                id="description"
-                                                                                name="description"
-                                                                                value={description}
-                                                                                onChange={(e) => setDescription(e.target.value)}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="form_input">
-                                                                            <label htmlFor="defects">Defects:</label>
-                                                                            <input
-                                                                                id="defects"
-                                                                                name="defects"
-                                                                                value={info}
-                                                                                onChange={(e) => setDefects(e.target.value)}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="form_input">
-                                                                            <label htmlFor="price">Price:</label>
-                                                                            <input
-                                                                                type="text"
-                                                                                id="price"
-                                                                                name="price"
-                                                                                value={price}
-                                                                                onChange={(e) => setPrice(e.target.value)}
-                                                                            />
-                                                                        </div>
-                                                                        <div className="form_input">
-                                                                            <label htmlFor="product_image">Image </label>
-                                                                            <input
-                                                                                type="file"
-                                                                                onChange={handleImageChange}
-                                                                                multiple
-                                                                            />
-                                                                        </div>
-                                                                        <button onClick={repairSubmit}>SUBMIT</button>
-                                                                        {error ? <p>ERROR! Please try again</p> : <></>}
-                                                                        {success ? <p>Successfully Submitted!</p> : <></>}
-                                                                        {loading1 ? <p>Processing Request....</p> : <></>}
-                                                                    </form>
-                                                                </> : <></>}
-                                                            </>
-                                                            : <></>}
-                                                    </>
-                                                )
-                                                }</>
-                                            : <></>)
-                                        :
-                                        <>
-                                            <button onClick={claim}>CLAIM</button>
-                                            {error ? <p>ERROR! Please try again</p> : <></>}
-                                            {success ? <p>Successfully Claimed!</p> : <></>}
-                                            {loading1 ? <p>Processing Request....</p> : <></>}
-                                        </>}
-                                </>
-                                : <></>
-                            }</> : <></>}
+                                                        }
+                                                    </> : (
+                                                        <>
+                                                            {!item.product_repair_status ?
+                                                                <>
+                                                                    <button onClick={repair}>REPAIR</button>
+                                                                    {repairModal ? <>
+                                                                        <form>
+                                                                            <div className="form_input">
+                                                                                <label htmlFor="description">Description:</label>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    id="description"
+                                                                                    name="description"
+                                                                                    value={description}
+                                                                                    onChange={(e) => setDescription(e.target.value)}
+                                                                                />
+                                                                            </div>
+                                                                            <div className="form_input">
+                                                                                <label htmlFor="defects">Defects:</label>
+                                                                                <input
+                                                                                    id="defects"
+                                                                                    name="defects"
+                                                                                    value={info}
+                                                                                    onChange={(e) => setDefects(e.target.value)}
+                                                                                />
+                                                                            </div>
+                                                                            <div className="form_input">
+                                                                                <label htmlFor="price">Price:</label>
+                                                                                <input
+                                                                                    type="text"
+                                                                                    id="price"
+                                                                                    name="price"
+                                                                                    value={price}
+                                                                                    onChange={(e) => setPrice(e.target.value)}
+                                                                                />
+                                                                            </div>
+                                                                            <div className="form_input">
+                                                                                <label htmlFor="product_image">Image </label>
+                                                                                <input
+                                                                                    type="file"
+                                                                                    onChange={handleImageChange}
+                                                                                    multiple
+                                                                                />
+                                                                            </div>
+                                                                            <button onClick={repairSubmit}>SUBMIT</button>
+                                                                            {error ? <p>ERROR! Please try again</p> : <></>}
+                                                                            {success ? <p>Successfully Submitted!</p> : <></>}
+                                                                            {loading1 ? <p>Processing Request....</p> : <></>}
+                                                                        </form>
+                                                                    </> : <></>}
+                                                                </>
+                                                                : <></>}
+                                                        </>
+                                                    )
+                                                    }</>
+                                                : <></>)
+                                            :
+                                            <>
+                                                <button onClick={claim}>CLAIM</button>
+                                                {error ? <p>ERROR! Please try again</p> : <></>}
+                                                {success ? <p>Successfully Claimed!</p> : <></>}
+                                                {loading1 ? <p>Processing Request....</p> : <></>}
+                                            </>}
+                                    </>
+                                    : <></>
+                                }</> : <></>}
 
                             {isAgent ? <>
-                            {item.product_repair_status && !item.product_received ?
-                                <>
-                                    <button onClick={handover}>HANDOVER</button>
-                                    {handoverModal?
-                                        <form>
-                                            <div className="form_input">
-                                                <label htmlFor="receiverName">Receiver Name:</label>
-                                                <input
-                                                    type="text"
-                                                    id="receiverName"
-                                                    name="receiverName"
-                                                    value={receiverName}
-                                                    onChange={(e) => setReceiverName(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="form_input">
-                                                <label htmlFor="receiverAadharNumber">Aadhar Number:</label>
-                                                <input
-                                                    type="text"
-                                                    id="receiverAadharNumber"
-                                                    name="receiverAadharNumber"
-                                                    value={receiverAadharNumber}
-                                                    onChange={(e) => setReceiverAadharNumber(e.target.value)}
-                                                />
-                                            </div>
-                                            <button onClick={handoverSubmit}>SUBMIT</button>
-                                            {error ? <p>ERROR! Please try again</p> : <></>}
-                                            {success ? <p>Successfully Donated!</p> : <></>}
-                                            {loading1 ? <p>Processing Request....</p> : <></>}
-                                        </form>
-                                    :<></>}
-                            
-                                </> :
+                                {item.product_repair_status && !item.product_received ?
+                                    <>
+                                        <button onClick={handover}>HANDOVER</button>
+                                        {handoverModal ?
+                                            <form>
+                                                <div className="form_input">
+                                                    <label htmlFor="receiverName">Receiver Name:</label>
+                                                    <input
+                                                        type="text"
+                                                        id="receiverName"
+                                                        name="receiverName"
+                                                        value={receiverName}
+                                                        onChange={(e) => setReceiverName(e.target.value)}
+                                                    />
+                                                </div>
+                                                <div className="form_input">
+                                                    <label htmlFor="receiverAadharNumber">Aadhar Number:</label>
+                                                    <input
+                                                        type="text"
+                                                        id="receiverAadharNumber"
+                                                        name="receiverAadharNumber"
+                                                        value={receiverAadharNumber}
+                                                        onChange={(e) => setReceiverAadharNumber(e.target.value)}
+                                                    />
+                                                </div>
+                                                <button onClick={handoverSubmit}>SUBMIT</button>
+                                                {error ? <p>ERROR! Please try again</p> : <></>}
+                                                {success ? <p>Successfully Donated!</p> : <></>}
+                                                {loading1 ? <p>Processing Request....</p> : <></>}
+                                            </form>
+                                            : <></>}
 
-                                <></>
-                            }</> : <></>}
+                                    </> :
+
+                                    <></>
+                                }</> : <></>}
 
                             {item.product_received ?
                                 <p style={{ 'color': 'green', }}><strong>
-                                    Prodcut Already Donated
+                                    Product Already Donated
                                 </strong></p> :
 
                                 <></>
@@ -410,7 +410,28 @@ function Individual() {
                 <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
                 <p><strong>Aadhar Number : </strong>{item.product_receiver.receiver_aadhar_number}</p>
             </div>
-            : <></>}
+                : <></>}
+            {item.product_repair_status ? <>
+                <div className="donorInfo">
+                    <p style={{ "fontSize": "200%" }}><strong>Repair Detail</strong></p>
+                    <div className="SliderDivOne">
+                        <Slide>
+                            {item.product_pictures_after.map((slideImage, index) => (
+                                <div key={index}>
+                                    <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
+                                    </div>
+                                </div>
+                            ))}
+                        </Slide>
+                    </div>
+                    <p><strong>Defects: </strong>{item.product_defects_after}</p>
+                    <p><strong>Description: </strong>{item.product_description_after}</p>
+                    <p><strong>Price: </strong>{item.product_repair_amount}</p>
+                </div>
+            </>
+                :
+                <></>
+            }
         </>
     )
 }
