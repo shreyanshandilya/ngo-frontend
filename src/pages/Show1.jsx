@@ -415,7 +415,6 @@ function Individual() {
             </div>
                 : <></>}
             {item.product_repair_status ? <>
-                <p style={{ "fontSize": "200%" }}><strong>Repair Details</strong></p>
                 <div className="oneProduct">
                     <div className="SliderDivOne">
                         <Slide>
@@ -428,6 +427,7 @@ function Individual() {
                         </Slide>
                     </div>
                     <div className="productDetailsDiv">
+                        <p style={{ "fontSize": "200%" }}><strong>Repair Details</strong></p>
                         <p><strong>Defects: </strong>{item.product_defects_after}</p>
                         <p><strong>Description: </strong>{item.product_description_after}</p>
                         <p><strong>Price: </strong>{item.product_repair_amount}</p>
