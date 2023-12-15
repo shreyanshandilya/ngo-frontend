@@ -138,24 +138,6 @@ function Individual() {
         else {
             setError(1);
         }
-        // fetch(`${process.env.REACT_APP_BASE_URL}/product/repair`, {
-        //     method: "POST",
-        //     body: JSON.stringify(data),
-        //     headers: {
-        //         "Content-type": "application/json; charset=UTF-8"
-        //     }
-        // })
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         if (json.message == "Product details Succesfully Updated") {
-        //             setSuccess(true);
-        //             setLoading1(false);
-        //         }
-        //         else {
-        //             setError(true);
-        //             setLoading1(false)
-        //         }
-        //     });
     }
 
     const handleImageChange = (e) => {
@@ -201,7 +183,6 @@ function Individual() {
     useEffect(() => {
         if (AuthVerify(localStorage.getItem("token")) && localStorage.getItem("role") == "agent") {
             setisAgent(true);
-            console.log(isAgent)
             const token = localStorage.getItem("token")
             fetch(`${process.env.REACT_APP_BASE_URL}/agent/view`, {
                 headers: { "Authorization": `Bearer ${token}` }
@@ -344,7 +325,7 @@ function Individual() {
                                     : <></>
                                 }</> : <></>}
 
-                            {isAgent ? <>
+                            {isAgent && item.product_agent["_id"] === agent ? <>
                                 {item.product_repair_status && !item.product_received ?
                                     <>
                                         <button onClick={handover}>HANDOVER</button>
@@ -384,7 +365,7 @@ function Individual() {
 
                             {item.product_received ?
                                 <p style={{ 'color': 'green', }}><strong>
-                                    Product Already Donated
+                                    Prodcut Already Donated
                                 </strong></p> :
 
                                 <></>
@@ -396,27 +377,13 @@ function Individual() {
                             }
                         </div>
                     </div>
-                    <div className="donorInfo">
-                        <p style={{ "fontSize": "200%" }}><strong>Donor Details</strong></p>
-                        <p><strong>Name:  </strong>{item.product_donor.donor_name}</p>
-                        <p><strong>Mobile Number:  </strong>{item.product_donor.donor_mob_number}</p>
-                        <p><strong>Address:  </strong>{item.product_donor.donor_address}</p>
-                        <p><strong>Email:  </strong>{item.product_donor.donor_email}</p>
-                    </div>
                 </> : <></>
             }
-            {item.product_received ? <div className="donorInfo">
-                <p style={{ "fontSize": "200%" }}><strong>Receiver Details</strong></p>
-                <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
-                <p><strong>Aadhar Number : </strong>{item.product_receiver.receiver_aadhar_number}</p>
-            </div>
-                : <></>}
-            {item.product_repair_status ? <>
-                <div className="donorInfo">
-                    <p style={{ "fontSize": "200%" }}><strong>Repair Detail</strong></p>
+            {item["_id"] && item.product_repair_status ?
+                <div className='oneProduct'>
                     <div className="SliderDivOne">
                         <Slide>
-                            {item.product_pictures_after.map((slideImage, index) => (
+                            {item.product_pictures_before.map((slideImage, index) => (
                                 <div key={index}>
                                     <div style={{ ...divStyle, 'backgroundImage': `url(${slideImage.url})` }}>
                                     </div>
@@ -424,11 +391,39 @@ function Individual() {
                             ))}
                         </Slide>
                     </div>
-                    <p><strong>Defects: </strong>{item.product_defects_after}</p>
-                    <p><strong>Description: </strong>{item.product_description_after}</p>
-                    <p><strong>Price: </strong>{item.product_repair_amount}</p>
+                    <div className="productDetailsDiv">
+                        <p style={{ "fontSize": "200%" }}><strong>Repair Details</strong></p>
+                        <p><strong>Defects : </strong>{item.product_defects_after}</p>
+                        <p><strong>Description : </strong>{item.product_description_after}</p>
+                        <p><strong>Price : </strong>{item.product_repair_amount}</p>
+                    </div>
                 </div>
-            </>
+                :
+                <></>
+
+            }
+
+            <div className="oneProduct">
+                <div className="productDetailsDiv">
+                    {item["_id"] ? <p style={{ "fontSize": "150%" }}>Donated By: <strong>{item.product_donor.donor_name}</strong></p> : <></>}
+                    {item["_id"] && localStorage.getItem('role') == 'admin' || localStorage.getItem('role') == 'agent' ?
+                        <>
+                            <p><strong>Mobile Number:  </strong>{item.product_donor.donor_mob_number}</p>
+                            <p><strong>Address:  </strong>{item.product_donor.donor_address}</p>
+                            <p><strong>Email:  </strong>{item.product_donor.donor_email}</p>
+                        </>
+                        :
+                        <></>
+                    }
+                </div>
+            </div>
+            {item["_id"] && (localStorage.getItem('role') == 'admin' || localStorage.getItem('role') == 'agent') && item.product_received ? <div className="oneProduct">
+                <div className="productDetailsDiv">
+                    <p style={{ "fontSize": "120%" }}><strong>Receiver Details</strong></p>
+                    <p><strong>Name : </strong>{item.product_receiver.receiver_name}</p>
+                    <p><strong>Aadhar Number : </strong>{item.product_receiver.receiver_aadhar_number}</p>
+                </div>
+            </div>
                 :
                 <></>
             }
